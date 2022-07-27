@@ -11,6 +11,7 @@
   "dependencies": {
     "@bootstrap-styled/provider": "^2.0.3",
     "@bootstrap-styled/v4": "^3.4.0",
+    "framer-motion": "^6.5.1",
     "next": "12.2.3",
     "react": "18.2.0",
     "react-bootstrap-icons": "^1.8.4",
