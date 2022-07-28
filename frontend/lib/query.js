@@ -1,6 +1,3 @@
-// export const PRODUCT_QUERY = `
-
-// `;
 
 export const PRODUCT_QUERY = `
 query{
@@ -23,3 +20,23 @@ query{
     }
   }
 `;
+
+export const HOME_ASSETS_QUERY =  `
+  query{
+    assets{
+      data{
+          attributes{
+            Title
+            Image{
+            data{
+              attributes{
+                formats
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+`

@@ -1,12 +1,12 @@
 import { Nav } from "../layout"
 
 
-const mens = () => {
+const men = () => {
   return (
     <div>
-        <Nav/>
+        <Nav color="black"/>
     </div>
   )
 }
 
-export default mens
+export default men;
