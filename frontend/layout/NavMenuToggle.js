@@ -15,7 +15,7 @@ export const NavMenuToggle = ({ toggle, toggleValue, color }) => (
     
     <button 
         onClick={toggle} 
-        style={{position: 'absolute'}}
+        style={{left: toggleValue && '1rem', top: toggleValue && '.3rem'}}
     >
     <svg width="10" height="10" viewBox="0 0 23 23">
       <Path

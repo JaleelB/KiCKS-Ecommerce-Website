@@ -21,22 +21,22 @@ query{
   }
 `;
 
-export const HOME_ASSETS_QUERY =  `
-  query{
-    assets{
-      data{
-          attributes{
-            Title
-            Image{
-            data{
+export const ASSETS_QUERY =  `
+query{
+  assets{
+    data{
+      attributes{
+        Location
+        Title
+        Image{
+          data{
               attributes{
                 formats
               }
-            }
           }
-
         }
       }
     }
   }
+}
 `

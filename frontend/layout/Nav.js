@@ -4,11 +4,16 @@ import * as Icon from 'react-bootstrap-icons';
 import { NavMenuToggle } from './NavMenuToggle';
 import { motion, useCycle } from "framer-motion";
 
+const StyledNavLogo = styled.a`
+    font-size:var(--ft-logo); font-weight: 500;
+    color: var(--orange); text-decoration: none;
+`
+
 const Navbar = styled.div `
 
     ${(props) => `
         position: relative; top: 0; width: 100%; min-height: 35px;
-        background-color: ${props => (props.color && props.color)};
+        // background-color: ${props => (props.color && props.color)};
 
         .navbar-inner{ 
             width: 100%; max-width: 1920px; margin-inline: auto;
@@ -21,36 +26,32 @@ const Navbar = styled.div `
             display: flex; align-items: center;
         }
 
-        .action-icon{ 
-            font-size: 1.6rem; 
-
-            path{ stroke-width: 1; }
-        }
-
         .desktop-nav{
             list-style-type: none; justify-content: flex-start;
-            font-size: .8rem; padding-left:5%; 
+            font-size: .8rem; padding: 12px 0 12px 5%; 
 
             .link-wrapper{
                 padding: 5px 12px;
                 @media (max-width: 768px){ padding: 12px; }
+
+                a{
+                    text-decoration: none; color: inherit;
+                }
             }
 
             @media (max-width: 970px){ display: none; }
         }
 
-        
 
         .mobile-nav{
-            padding-left: 5%;
-
+            
             nav{
-                position: relative; 
+                position: relative; padding-left: 5%;
 
                 .background{
-                    position:absolute; top: -2rem;  bottom: 0; left: 0;
-                    width: 300px; height: 110vh; background-color: #fff;
-                    z-index: 2000; margin-left: -5%; 
+                    position:absolute; top: -1rem;  bottom: 0; left: 0;
+                    width: 300px; height: 100vh; background-color: var(--primary-white);
+                    z-index: 2000;
                 }
 
                 .mobile-nav-links,.nav-link {
@@ -58,13 +59,13 @@ const Navbar = styled.div `
                 }
 
                 .mobile-nav-links{
-                    position: absolute; top: 3rem; z-index: 2000; 
-                    margin-inline: auto; width: 300px; 
+                    position: absolute;  z-index: 2000; 
+                    top: 5rem; width: 300px; 
 
                     .link-wrapper {
                         list-style: none; margin-bottom: 20px; width: 100%;
                         display: flex; align-items: center; padding: 0 25px;
-                        color: black; cursor: pointer; font-weight: 600;
+                        color: black; cursor: pointer; font-weight: 700;
 
                     
                         div{
@@ -77,8 +78,7 @@ const Navbar = styled.div `
 
                 button{
                     background-color: transparent; appearance: none;  outline: none;
-                    border: none; color: ${props.theme['$text-color-white']}; 
-                    z-index: 3000; top: -.3rem;          
+                    border: none; z-index: 3000; top: -.3rem; position: absolute;     
                     svg{
                         width: 1.2rem; height: 1.2rem; margin-top: -1rem; padding-left:5%; 
                     }
@@ -91,17 +91,20 @@ const Navbar = styled.div `
         .shopping-information{
             justify-content: flex-end; padding-right: 5%; 
 
+
             & > *{
                 padding: 5px 8px; cursor: pointer;
-                font-weight: 500; font-size:${props.theme['$ft-heading']};
+                font-weight: 500; font-size: var(--ft-heading);
+
+                path{
+                    stroke-width: 5
+                }
             }
         }
 
 
         .logo-wrapper{
-            color: ${props.theme['$orange']}; justify-content: center; font-weight: 700;
-
-            .logo{ font-size:${props.theme['$ft-heading']}; }
+             justify-content: center; font-weight: 700;
         }
 
     `};
@@ -155,15 +158,22 @@ const Nav = ({color}) => {
     return(
         <Navbar>
             <div className="navbar-inner">
-                <ul className="desktop-nav" style={{color: color && color}}>
+                <ul className="desktop-nav" >
                     {
                         links.map((link, index)=>{
                             return  (
                                 <li 
                                     className="link-wrapper"
                                     key={index}
+                                    style={{color: `${color}`}}
                                 >
-                                    <Link className="nav-link" href={`/${urlPaths[index]}`}>{link}</Link>
+                                    <Link 
+                                        className="nav-link"
+                                        href={`/${urlPaths[index]}`}
+                                        
+                                    >
+                                        {link}
+                                    </Link>
                                 </li>
                             )
                         })
@@ -187,6 +197,7 @@ const Nav = ({color}) => {
                                             variants={variants}
                                             whileTap={{ scale: 0.8 }}
                                             key={index}
+                                            style={{pointerEvents: !isOpen && 'none'}}
                                         >
                                             <Link className="nav-link" href={`/${urlPaths[index]}`}>
                                                 <div>
@@ -215,21 +226,21 @@ const Nav = ({color}) => {
                 
 
                 <div className="logo-wrapper">
-                    <Link className="logo" href='/'>KiCKS</Link>
+                    <StyledNavLogo href='/'>KiCKS</StyledNavLogo>
                 </div>
 
-                <div className="shopping-information" style={{color: color && color}}>
+                <div className="shopping-information">
                     
                     <Link className="watchlist" href='/watchlist'>
-                        <Icon.Heart className='action-icon'/>
+                        <Icon.Heart className='action-icon' style={{fill: color && color}}/>
                     </Link>
 
                     <Link className="profile" href='/profile'>
-                        <Icon.People className='action-icon'/>
+                        <Icon.People className='action-icon' style={{fill: color && color}}/>
                     </Link>
 
                     <Link className="cart" href='/cart'>
-                        <Icon.Bag className='action-icon'/>
+                        <Icon.Bag className='action-icon' style={{fill: color && color}}/>
                     </Link>
                     
                 </div>

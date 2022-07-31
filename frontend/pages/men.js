@@ -1,11 +1,11 @@
-import { Nav } from "../layout"
+import { Layout } from "../layout"
 
 
 const men = () => {
   return (
-    <div>
-        <Nav color="black"/>
-    </div>
+    <Layout color="black">
+      <h1>hi</h1>
+    </Layout>
   )
 }
 

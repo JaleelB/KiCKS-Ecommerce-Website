@@ -6,21 +6,28 @@ const GlobalStyles = createGlobalStyle`
 
     html {
         box-sizing: border-box; width: 100%; scroll-behavior: smooth;
-        scrollbar-width: thin;
+        scrollbar-width: thin; overflow-x:hidden; 
     }
   
     *, *:before, *:after { box-sizing: inherit; margin: 0; padding: 0;}
 
     body {
-        margin: 0; width: 100%; min-height: 100%;  overflow-x: hidden;
-        background-color: var(--primary-black); color: var(--primary-white); line-height: 1.3;
-        font-family: var(--font-sans); font-size: var(--fz-xl);
+        margin: 0; width: 100vw; min-height: 100%;  overflow-x: hidden;
+        background-color: var(--black); color: var(--primary-white); line-height: 1.3;
+        font-family: var(--ft-sans); font-size: var(--fz-xl);
 
         main{
-            width: 100vw; min-height: 100vh;
+            width: 100%; max-width: 1920px; 
+            min-height: 100vh; margin-inline: auto;
 
             section{
-                width: 100%; border: 1px solid red;
+                width: 100%; height: 100%; 
+                @media(max-width: 760px){padding: 40px 0;}
+                padding: 80px 0;
+
+                svg{
+                    font-size: var(--ft-lg)
+                }
             }
         }
         
