@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useQuery } from 'urql';
 import { PRODUCT_QUERY, ASSETS_QUERY } from '../lib/query';
-import {Hero, Important, BestSellers} from '../containers'
+import {Hero, Important, BestSellers, ProductCategories} from '../containers'
 import {Layout} from '../layout';
 import { useEffect, useState } from 'react';
 
@@ -20,9 +20,10 @@ export default function Home() {
 
   return  (
       <Layout color="white">
-        <Hero heroAsset={products[4]}/>
+        <Hero heroAsset={products[2]}/>
         <Important/>
-        <BestSellers/>
+        <BestSellers products={products} color="white"/>
+        <ProductCategories/>
       </Layout>
   )
 }

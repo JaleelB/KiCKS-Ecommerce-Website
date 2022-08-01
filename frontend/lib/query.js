@@ -8,6 +8,10 @@ query{
           Description
           Price
           Slug
+          Gender
+          Color
+          Brand
+          Rating
           Image{
             data{
               attributes{

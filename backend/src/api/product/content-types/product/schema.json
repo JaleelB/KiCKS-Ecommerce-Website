@@ -15,7 +15,7 @@
     "Title": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": false
     },
     "Description": {
       "type": "text",
@@ -38,6 +38,23 @@
     },
     "Slug": {
       "type": "uid"
+    },
+    "Gender": {
+      "type": "string",
+      "required": true,
+      "default": "Both"
+    },
+    "Color": {
+      "type": "string",
+      "required": true
+    },
+    "Brand": {
+      "type": "string"
+    },
+    "Rating": {
+      "type": "decimal",
+      "default": 0,
+      "required": true
     }
   }
 }
