@@ -8,8 +8,12 @@ const StyledProductCard = styled.div`
     @media(min-width: 961px) and (max-width: 1920px){--products-in-view: 3;}
     @media(min-width: 1921px){--products-in-view: 4.05;}
 
-    flex: 0 0 calc(100% / var(--products-in-view) );  max-width: calc(100% / var(--products-in-view));  
-    border: 2px solid var(--primary-white); padding: var(--card-margin);
+    /* flex: 0 0 calc(100% / var(--products-in-view) );  max-width: calc(100% / var(--products-in-view));   */
+    border: 2px solid var(--primary-white);
+    padding: var(--card-margin); height: auto; 
+    @media (max-width: 1024px){
+        margin-bottom: 2rem;
+    }
     ${({ theme }) => theme.flexColumn}
 
     .product-inner{
@@ -20,7 +24,7 @@ const StyledProductCard = styled.div`
             ${({ theme }) => theme.flexCenter}
 
             img{
-                inline-size: 100%; object-fit: contain;
+                inline-size: 90%; object-fit: contain; margin-inline: auto;
             }
         }
 
@@ -28,6 +32,9 @@ const StyledProductCard = styled.div`
             margin-top: auto; padding: var(--card-margin);
             ${({ theme }) => theme.flexColumn}
             gap: 5px;
+            @media (max-width: 1024px){
+                margin-bottom: 3rem;
+            }
 
             .product-brand{ text-transform: uppercase; }
             .product-title{ color: var(--orange) }

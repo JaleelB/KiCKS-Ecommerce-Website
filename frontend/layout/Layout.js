@@ -1,6 +1,7 @@
 import { Head, Nav } from "../layout";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, mixins } from "../styles";
+import Footer from "./Footer";
 
 const Layout = ({children, color}) => {
 
@@ -9,14 +10,16 @@ const Layout = ({children, color}) => {
         <div className="root">
             <ThemeProvider theme={mixins}>
                 <GlobalStyles/>
-                <Nav color={color}/>
-
+                
                 <div className="app-content">
+                    <Nav color={color}/>
                     <main className="main-container">
                         {children}
-                    </main>
-                    
+                    </main>  
+                    <Footer/>
                 </div>
+
+                
             </ThemeProvider>
         </div>
     </>

@@ -25,9 +25,16 @@ const GlobalStyles = createGlobalStyle`
                 @media(max-width: 760px){padding: 40px 0;}
                 padding: 80px 0;
 
-                svg{
-                    font-size: var(--ft-lg)
+                .inner{
+                    width: 90%; margin-inline: auto;
+                    svg{
+                        font-size: var(--ft-lg)
+                    }
                 }
+
+                /* svg{
+                    font-size: var(--ft-lg)
+                } */
             }
         }
         

@@ -10,6 +10,7 @@ const variables = css`
         --orange : #FF3D00; 
         --text-color-white: #fff;
         --black: #000;
+        --light-grey: #676767;
 
         //fonts
         --ft-mono: "SF Mono","Fira Code","Fira Mono","Roboto Mono",monospace;
@@ -24,7 +25,7 @@ const variables = css`
         --ft-heading: 2rem;
         --ft-logo: clamp(1.2rem, 1vw, 1.4rem);
         --ft-medium-bold: clamp(20px, 5vw, 40px);
-        --ft-large-bold: clamp(40px, 5vw, 80px);
+        --ft-large-bold: clamp(35px, 5vw, 80px);
     }
 `;
 

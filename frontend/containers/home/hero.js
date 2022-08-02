@@ -3,9 +3,8 @@ import styled from 'styled-components';
 
 const StyledHeroSection = styled.section`
 
-    .hero-inner{
-        width: 90%; padding: 70px 0;
-         margin-inline: auto; 
+    .inner{
+         padding: 70px 0;
          ${({ theme }) => theme.flexColumn};
 
         .hero-center{
@@ -67,7 +66,7 @@ const Hero = ({heroAsset}) => {
 
     return(
         <StyledHeroSection>
-            <div className='hero-inner'>
+            <div className='inner'>
 
                 <div className="hero-center">
                     <h2 className="large-bold-text">nike</h2>

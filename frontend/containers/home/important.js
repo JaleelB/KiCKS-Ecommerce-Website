@@ -4,10 +4,9 @@ const StyledImportantSection = styled.section`
     padding: 0; 
 
     .inner{
-      width: 90%; margin-inline:auto; 
       ${({ theme }) => theme.flexSpaceBetween};
 
-      @media(max-width: 480px){
+      @media(max-width: 759px){
         ${({ theme }) => theme.flexColumn};
       }
     }
@@ -18,7 +17,7 @@ const StyledLink = styled.a`
     width: 49.5%; position: relative;
     text-decoration: none; color: var(--primary-white);
 
-    @media(max-width: 480px){ width: 100%; }
+    @media(max-width: 759px){ width: 100%; }
 
     .section-title{ 
       position: absolute; top: 1rem; 
@@ -41,20 +40,32 @@ const StyledLink = styled.a`
 `;
 
 const Important = () => {
+
+  const sections = [
+    {
+        title: 'New Classics',
+        url: 'https://images.pexels.com/photos/6726156/pexels-photo-6726156.jpeg?cs=srgb&dl=pexels-hipkicks-6726156.jpg&fm=jpg'
+    },
+    {
+      title: 'Summer Essentials',
+        url: 'https://images.pexels.com/photos/1456735/pexels-photo-1456735.jpeg?cs=srgb&dl=pexels-ray-piedra-1456735.jpg&fm=jpg'
+    }
+  ]
+
   return (
     <StyledImportantSection>
       <div className="inner">
-        <StyledLink href={'/newclassics'}>
-          <h3 className="section-title">New Classics</h3>
-          <button className="cta-button">See More</button>
-          <img className="background" src={`https://images.pexels.com/photos/6726156/pexels-photo-6726156.jpeg?cs=srgb&dl=pexels-hipkicks-6726156.jpg&fm=jpg`} alt=""/>
-        </StyledLink>
-
-        <StyledLink href={'/summer-essentials'}>
-          <h3 className="section-title">Summer Essentials</h3>
-          <button className="cta-button">See More</button>
-          <img className="background" src={`https://images.pexels.com/photos/1456735/pexels-photo-1456735.jpeg?cs=srgb&dl=pexels-ray-piedra-1456735.jpg&fm=jpg`} alt=""/>
-        </StyledLink>
+        {
+          sections.map((section, index)=>{
+            return (
+              <StyledLink href={'/newclassics'} key={index}>
+                <h3 className="section-title">{section.title}</h3>
+                <button className="cta-button">See More</button>
+                <img className="background" src={section.url} alt=""/>
+              </StyledLink>
+            )
+          })
+        }
       </div>
     </StyledImportantSection>
   )

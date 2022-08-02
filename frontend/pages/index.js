@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import { useQuery } from 'urql';
 import { PRODUCT_QUERY, ASSETS_QUERY } from '../lib/query';
-import {Hero, Important, BestSellers, ProductCategories} from '../containers'
+import {Hero, Important, BestSellers, ProductCategories, SummerCollection} from '../containers'
 import {Layout} from '../layout';
 import { useEffect, useState } from 'react';
+import { Newsletter } from '../features';
 
 export default function Home() {
   //fetching data from strapi backend
@@ -24,6 +25,8 @@ export default function Home() {
         <Important/>
         <BestSellers products={products} color="white"/>
         <ProductCategories/>
+        <SummerCollection/>
+        <Newsletter/>
       </Layout>
   )
 }

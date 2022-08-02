@@ -3,23 +3,24 @@ import { Product } from "../../components";
 
 const StyledBestSellers = styled.section`
     .inner{
-        width: 90%; margin-inline: auto;
-
+    
         .carousel-header{
-            font-size: var(--ft-medium-bold); color: var(--orange);
+            font-size: var(--ft-large-bold); color: var(--orange);
+            margin-bottom: 1rem;
 
             span{ margin-right: .5rem; color: var(--primary-white)}
         }
 
         .best-sellers-carousel{
-            ${({ theme }) => theme.flexSpaceBetween};
-            gap: 8px; margin-top: 2rem; overflow-x: auto;
 
-            /* smartphones, touchscreens */
-            @media (hover: none) and (pointer: coarse) {
-                &::-webkit-scrollbar { display: none; }
-                -ms-overflow-style: none;  scrollbar-width: none;
+            display: grid;  gap: 8px;
+            overflow-x: auto; overflow-y: hidden;
+            grid-auto-flow: column; grid-auto-columns: 25%;
+
+            @media (max-width: 1024px){
+                grid-auto-columns: 46%;
             }
+
         }
     }
 `;
@@ -32,16 +33,16 @@ const BestSellers = ({products, color}) => {
     <StyledBestSellers>
         <div className="inner">
             <h3 className="carousel-header">
-                <span className="orange-text">BEST</span>
-                SELLERS
+                <span className="orange-text">Best</span>
+                Sellers
             </h3>
 
             <div className="best-sellers-carousel">
                 {
-                    bestSellingProducts.map((product)=>{
-                        console.log(product)
+                    bestSellingProducts.map((product, index)=>{
                         return (
                             <Product 
+                                key={index}
                                 title={product.attributes.Title} 
                                 color={color}
                                 image={product.attributes.Image.data.attributes.formats.thumbnail.url}

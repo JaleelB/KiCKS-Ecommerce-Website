@@ -2,9 +2,8 @@ import Link from "next/link";
 import styled from "styled-components"
 
 const StyledProductCategories = styled.section`
-    .categories-inner{
-        width: 90%; margin-inline: auto; 
-        display: flex;
+    .inner{
+        display: flex; flex-flow: row;
 
         @media(max-width: 540px){
             ${({ theme }) => theme.flexColumn};
@@ -14,17 +13,18 @@ const StyledProductCategories = styled.section`
 
 const StyledCategoryLinks = styled.a`
     display: flex; position: relative;
-    width: (100% / 2); height: 100%; 
+    width: 50%; height: 100%; 
 
     @media(max-width: 960px){
         ${({ theme }) => theme.flexColumn}; width: 100%;
     }
     
     .background{
-        height: 100%; width: 100%;
+         width: 100%;  flex: 1.3344;
 
         .background-image{
-            inline-size: 100%; object-fit: contain;
+            inline-size: 100%; object-fit: contain; 
+            height: auto; vertical-align: middle;
         }
 
     }
@@ -35,7 +35,7 @@ const StyledCategoryLinks = styled.a`
 
         .cta-btn{
             ${({ theme }) => theme.CTAButton};
-            
+            text-transform: uppercase;
         }
     }
 `;
@@ -44,11 +44,11 @@ const ProductCategories = () => {
 
     const categoryImages = [
         {
-            category: 'MEN',
+            category: 'men',
             url: 'https://images.pexels.com/photos/7776154/pexels-photo-7776154.jpeg?cs=srgb&dl=pexels-pavel-danilyuk-7776154.jpg&fm=jpg'
         },
         {
-            category: 'WOMEN',
+            category: 'women',
             url: 'https://images.pexels.com/photos/6311675/pexels-photo-6311675.jpeg?cs=srgb&dl=pexels-monstera-6311675.jpg&fm=jpg'
         }
     
@@ -56,17 +56,17 @@ const ProductCategories = () => {
 
   return (
     <StyledProductCategories>
-        <div className="categories-inner">
+        <div className="inner">
             {
-                categoryImages.map((category)=>{
+                categoryImages.map((category, index)=>{
                     return (
-                        <StyledCategoryLinks>
+                        <StyledCategoryLinks key={index}>
                             <div className="background">
                                 <img className="background-image" src={category.url} alt="" />
                             </div>
 
                             <div className="cta-wrapper">
-                                <Link href={`/category.category`}>
+                                <Link href={`/${category.category}`}>
                                     <button className="cta-btn">
                                         {category.category}
                                     </button>
