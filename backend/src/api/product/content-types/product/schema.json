@@ -48,9 +48,6 @@
       "type": "string",
       "required": true
     },
-    "Brand": {
-      "type": "string"
-    },
     "Rating": {
       "type": "decimal",
       "default": 0,

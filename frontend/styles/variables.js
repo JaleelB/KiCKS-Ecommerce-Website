@@ -25,7 +25,7 @@ const variables = css`
         --ft-heading: 2rem;
         --ft-logo: clamp(1.2rem, 1vw, 1.4rem);
         --ft-medium-bold: clamp(20px, 5vw, 40px);
-        --ft-large-bold: clamp(35px, 5vw, 80px);
+        --ft-large-bold: clamp(35px, 5vw, 70px);
     }
 `;
 

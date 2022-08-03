@@ -35,7 +35,7 @@ const Navbar = styled.div `
                 @media (max-width: 768px){ padding: 12px; }
 
                 a{
-                    text-decoration: none; color: inherit;
+                    text-decoration: none; color: inherit; font-weight: 500;
                 }
             }
 
@@ -94,11 +94,8 @@ const Navbar = styled.div `
 
             & > *{
                 padding: 5px 8px; cursor: pointer;
-                font-weight: 500; font-size: var(--ft-heading);
+                font-size: var(--ft-heading);
 
-                path{
-                    stroke-width: 5
-                }
             }
         }
 

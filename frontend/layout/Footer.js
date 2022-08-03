@@ -9,6 +9,7 @@ const StyledFooter = styled.section`
 
     width: 100%; max-width: 1920px; 
     margin-inline: auto;
+    background-color: ${props => props.color};
 
     @media(max-width: 760px){padding: 40px 0;}
     padding: 80px 0;
@@ -39,7 +40,7 @@ const StyledFooter = styled.section`
     }
 `;
 
-const Footer = () => {
+const Footer = ({color}) => {
 
     const links = [
         'Instagram', 'Youtube', 'Facebook', 'About US',
@@ -48,7 +49,7 @@ const Footer = () => {
     ];
 
   return (
-    <StyledFooter>
+    <StyledFooter color={color === "white" ? '#000' : color}>
         <div className="inner">
             <h2 className="footer-title">KiCKS</h2>
             <ul className="footer-links-wrapper">

@@ -15,11 +15,12 @@ const StyledBestSellers = styled.section`
 
             display: grid;  gap: 8px;
             overflow-x: auto; overflow-y: hidden;
-            grid-auto-flow: column; grid-auto-columns: 25%;
+            grid-auto-flow: column; 
+            //grid-auto-columns: 25%;
 
-            @media (max-width: 1024px){
+            /* @media (max-width: 1024px){
                 grid-auto-columns: 46%;
-            }
+            } */
 
         }
     }
@@ -47,7 +48,7 @@ const BestSellers = ({products, color}) => {
                                 color={color}
                                 image={product.attributes.Image.data.attributes.formats.thumbnail.url}
                                 price={product.attributes.Price}
-                                brand={product.attributes.Brand}
+                                gender={product.attributes.Gender}
                             />
                         )
                     })

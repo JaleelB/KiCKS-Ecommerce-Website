@@ -10,7 +10,6 @@ query{
           Slug
           Gender
           Color
-          Brand
           Rating
           Image{
             data{
@@ -25,22 +24,28 @@ query{
   }
 `;
 
-export const ASSETS_QUERY =  `
-query{
-  assets{
-    data{
-      attributes{
-        Location
-        Title
-        Image{
-          data{
+export const GET_PRODUCT_QUERY =  `
+  query getPtoducts($slug: String!){
+    products(filters: {Slug: {eq: $slug}}){
+      data{
+        attributes{
+          Color
+          Title
+          Description
+          Price
+          Slug
+          Gender
+          Color
+          Rating
+          Image{
+            data{
               attributes{
                 formats
               }
+            }
           }
         }
       }
     }
   }
-}
-`
+`;

@@ -46,7 +46,7 @@ const StyledHeroSection = styled.section`
                 font-size: var(--ft-xxl); 
             }
 
-            p{ max-width: 480px; line-height: 1.5; }
+            p{ max-width: 480px; line-height: 1.7;  }
         }
 
         .cta-wrapper{

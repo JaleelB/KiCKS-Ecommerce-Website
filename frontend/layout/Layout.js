@@ -7,7 +7,13 @@ const Layout = ({children, color}) => {
 
   return (
     <>
-        <div className="root">
+        <div 
+            className="root"
+            style={{
+                backgroundColor: color === 'white' && '#000',
+                color: color && color
+            }}
+        >
             <ThemeProvider theme={mixins}>
                 <GlobalStyles/>
                 
@@ -16,7 +22,7 @@ const Layout = ({children, color}) => {
                     <main className="main-container">
                         {children}
                     </main>  
-                    <Footer/>
+                    <Footer color={color}/>
                 </div>
 
                 

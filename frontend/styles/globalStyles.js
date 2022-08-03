@@ -13,7 +13,8 @@ const GlobalStyles = createGlobalStyle`
 
     body {
         margin: 0; width: 100vw; min-height: 100%;  overflow-x: hidden;
-        background-color: var(--black); color: var(--primary-white); line-height: 1.3;
+        /* background-color: var(--black);  color: var(--primary-white); */
+        line-height: 1.3; 
         font-family: var(--ft-sans); font-size: var(--fz-xl);
 
         main{
