@@ -22,10 +22,10 @@ const Layout = ({children, color}) => {
                     <main className="main-container">
                         {children}
                     </main>  
-                    <Footer color={color}/>
+                   
                 </div>
 
-                
+                <Footer color={color}/>
             </ThemeProvider>
         </div>
     </>

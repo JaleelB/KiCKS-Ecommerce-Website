@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledHeroSection = styled.section`
 
     .inner{
-         padding: 70px 0;
+         padding: 70px 0; max-width: 1440px;
          ${({ theme }) => theme.flexColumn};
 
         .hero-center{
@@ -28,7 +28,7 @@ const StyledHeroSection = styled.section`
 
                 .hero-image{
                     inline-size: 100%; object-fit: contain; 
-                    max-width: 1000px;   
+                    max-width: 900px;   
                 }
             }
         }

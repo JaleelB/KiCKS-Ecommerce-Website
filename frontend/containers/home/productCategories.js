@@ -2,6 +2,9 @@ import Link from "next/link";
 import styled from "styled-components"
 
 const StyledProductCategories = styled.section`
+
+    padding: 40px 0;
+
     .inner{
         display: flex; flex-flow: row;
 
