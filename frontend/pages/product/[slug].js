@@ -142,7 +142,7 @@ const ProductDetails = () => {
         15, 15.5, 16.5, 17
     ];
 
-    const { addToCart } = useCartContext();
+    const { addToCart, dispatch } = useCartContext();
 
     return (
         <Layout color={'black'}>
@@ -184,10 +184,10 @@ const ProductDetails = () => {
                             <p className="size-section-header">Select Size:</p>
                             <ul className="size-list">
                                 {
-                                    sizes.map((size, index)=>{
+                                    sizes.map((size)=>{
                                         return (
                                             <li 
-                                                key={index} 
+                                                key={uuidv4()} 
                                                 className={`size-item ${size === selectedSize ? "selected" : ""}`}
                                                 onClick={() => setSelectedSize(size)}
                                             >
@@ -208,15 +208,32 @@ const ProductDetails = () => {
                         <div className="cta-wrapper">
                             <button 
                                 className="cta-btn"
-                                onClick={()=> addToCart({
-                                    size: selectedSize,
-                                    color: Color, 
-                                    gender: Gender, 
-                                    image: Image.data.attributes.formats.thumbnail.url, 
-                                    price: Price, 
-                                    title: Title,
-                                    id: uuidv4()
-                                })}
+                                onClick={()=> 
+                                    // addToCart({
+                                    //     size: selectedSize,
+                                    //     color: Color, 
+                                    //     gender: Gender, 
+                                    //     image: Image.data.attributes.formats.thumbnail.url, 
+                                    //     price: Price, 
+                                    //     title: Title,
+                                    //     id: uuidv4(),
+                                    //     quantity: 1
+                                    // }
+
+                                    dispatch( {
+                                        type: 'add-item-to-cart', payload: {
+                                            size: selectedSize,
+                                            color: Color, 
+                                            gender: Gender, 
+                                            image: Image.data.attributes.formats.thumbnail.url, 
+                                            price: Price, 
+                                            title: Title,
+                                            id: uuidv4(),
+                                            slug: Slug,
+                                            quantity: 1
+                                        }
+                                    })
+                                }
                             >
                                 Add To Cart
                             </button>

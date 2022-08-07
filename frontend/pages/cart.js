@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { CartItem } from "../components";
 import { useCartContext } from "../context/CartContext";
 import { Layout } from "../layout";
+import { v4 as uuidv4 } from 'uuid';
 
 const StyledCart = styled.section`
 
@@ -94,11 +95,13 @@ const Cart = () => {
 
                 <div className="cart-wrapper">
                     <div className="order-products-information">
+
                         {cart.length === 0 && <p className="null-message"> You have no items in your bag </p>}
                         { cart.length > 0 &&
                             cart.map((cartItem)=>{
                                 return (
-                                    <CartItem 
+                                    <CartItem
+                                        key={uuidv4()}
                                         size={cartItem.size}
                                         color={cartItem.color}
                                         gender={cartItem.gender}
@@ -106,13 +109,13 @@ const Cart = () => {
                                         price={cartItem.price }
                                         title={cartItem.title}
                                         id={cartItem.id}
+                                        qty={cartItem.quantity}
+                                        slug={cartItem.slug}
                                     />
                                 )
                             })
                         }
                         
-
-                        {/* <CartItem/> */}
                     </div>
 
                     <div className="order-summary">
@@ -129,7 +132,7 @@ const Cart = () => {
                                     feesTitles.map((title) => {
                                         return (
                                             <div 
-                                                
+                                                key={uuidv4()}
                                                 className={
                                                     `
                                                     fee 

@@ -2,13 +2,16 @@ import styled from "styled-components";
 import * as Icon from 'react-bootstrap-icons';
 import { useState } from "react";
 import { useCartContext } from "../context/CartContext";
+import Link from "next/link";
 
 const StyledCartItem = styled.div`
     width: 100%; padding: .5rem; font-size: var(--ft-md);
+    
 
     .item-inner{
         ${({ theme }) => theme.flexSpaceBetween};
         gap: 1.5rem; color: var(--grey);
+        border-bottom: 2px solid var(--gray);
         
         .item-image-wrapper{
             .item-image{
@@ -59,9 +62,9 @@ const StyledCartItem = styled.div`
 
 const CartItem = (props) => {
 
-    const { removeFromCart } = useCartContext();
+    const { dispatch } = useCartContext();
 
-    const [qty, setQty] = useState(1);
+    const [qty, setQty] = useState(props.qty);
 
     const increaseQty = () => setQty((prevQty)=> prevQty + 1);
     const decreaseQty = () => setQty((prevQty)=> (prevQty > 1 ? prevQty - 1 : 1))
@@ -75,7 +78,7 @@ const CartItem = (props) => {
 
                 <div className="item-details">
                     <div className="pricing-group">
-                        <p className="item-name">{props.title}</p>
+                        <Link href={`/product/${props.slug}`}><p className="item-name">{props.title}</p></Link>
                         <p className="item-price">${props.price}</p>
                     </div>
 
@@ -100,7 +103,12 @@ const CartItem = (props) => {
                             <p className="quantity icon">{qty}</p>
                             <Icon.PlusCircleFill onClick={increaseQty}/>
                         </div>
-                        <div className="remove-item icon" onClick={()=> removeFromCart(props.id)}><Icon.Trash3/></div>
+                        <div 
+                            className="remove-item icon" 
+                            onClick={()=> dispatch({type: 'remove-from-cart', payload: {slug: props.slug, size: props.size}})}
+                        >
+                            <Icon.Trash3/>
+                        </div>
                     </div>
                 </div>
             </div>

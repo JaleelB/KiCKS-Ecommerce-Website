@@ -1,31 +1,41 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useReducer, useEffect } from 'react';
+import {CartReducer} from '../reducer/CartReducer';
 
-const CartContext = createContext();
+
+const PREFIX = 'kicks-eccommerce-';
+
+const INITIAL_STATE = {
+    cart: typeof window !== 'undefined' && (JSON.parse(sessionStorage.getItem(PREFIX + "cart")) || [])
+};
+
+export const CartContext = createContext(INITIAL_STATE);
 
 export function CartContextProvider({ children }) {
 
-  const [cart, setCart] = useState([]);
+//   const [cart, setCart] = useState([]);
+//   const [ttlPrice, setTtlPrice] = useState(0);
 
-  const addToCart = (newProduct) => setCart([...cart, newProduct]);
+//   const addToCart = (newProduct) => setCart([...cart, newProduct]);
 
-  const removeFromCart = (id) => {
-      const updatedCart = cart.filter(cartItem => cartItem['id'] !== id );
-      setCart(updatedCart)
-  }
-//   const talltTtl = () => 
-//use session storage top store cart information
+//   const removeFromCart = (id) => {
+//       const updatedCart = cart.filter(cartItem => cartItem['id'] !== id );
+//       setCart(updatedCart);
+//   }
+
+    const [state, dispatch] = useReducer(CartReducer, INITIAL_STATE);
 
     useEffect(()=>{
-        console.log(cart)
-    },[cart])
+        sessionStorage.setItem(PREFIX + "cart", JSON.stringify(state.cart))
+    },[state.cart])
 
-  return (
-    <CartContext.Provider value={{
-        addToCart, cart, removeFromCart
-    }}>
-      {children}
-    </CartContext.Provider>
-  );
+    return (
+        <CartContext.Provider value={{
+            // addToCart, cart, removeFromCart
+            cart: state.cart, dispatch
+        }}>
+        {children}
+        </CartContext.Provider>
+    );
 }
 
 export function useCartContext() {

@@ -165,7 +165,7 @@ const Nav = ({color}) => {
 
     const [isOpen, toggleOpen] = useCycle(false, true);
 
-    const {setBackgroundBlur } = useNavContext();
+    const { setBackgroundBlur } = useNavContext();
 
     useEffect(()=>{
         setBackgroundBlur(isOpen);
