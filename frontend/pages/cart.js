@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { CartItem } from "../components";
+import { useCartContext } from "../context/CartContext";
 import { Layout } from "../layout";
 
 const StyledCart = styled.section`
@@ -81,7 +82,9 @@ const StyledCart = styled.section`
 
 const Cart = () => {
 
-    const feesTitles = ['Subtotal', 'Estimated Shipping & Handling', 'Estimated Tax', 'Discount', 'Total']
+    const feesTitles = ['Subtotal', 'Estimated Shipping & Handling', 'Estimated Tax', 'Discount', 'Total'];
+
+    const { cart } = useCartContext();
 
   return (
     <Layout color="black">
@@ -91,12 +94,24 @@ const Cart = () => {
 
                 <div className="cart-wrapper">
                     <div className="order-products-information">
+                        {cart.length === 0 && <p className="null-message"> You have no items in your bag </p>}
+                        { cart.length > 0 &&
+                            cart.map((cartItem)=>{
+                                return (
+                                    <CartItem 
+                                        size={cartItem.size}
+                                        color={cartItem.color}
+                                        gender={cartItem.gender}
+                                        image={cartItem.image} 
+                                        price={cartItem.price }
+                                        title={cartItem.title}
+                                    />
+                                )
+                            })
+                        }
                         
-                        <p className="null-message">
-                            You have no items in your bag
-                        </p>
 
-                        <CartItem/>
+                        {/* <CartItem/> */}
                     </div>
 
                     <div className="order-summary">

@@ -3,7 +3,8 @@ import { Layout } from "../../layout";
 import { useQuery } from "urql";
 import {useRouter} from "next/router";
 import { GET_PRODUCT_QUERY } from "../../lib/query";
-import * as Icon from 'react-bootstrap-icons';
+import { useState } from "react";
+import { useCartContext } from "../../context/CartContext";
 
 const StyledProductDetails = styled.section`
     padding: 0;
@@ -82,6 +83,10 @@ const StyledProductDetails = styled.section`
                         flex: 0 0 calc(33% - 5px); background-color: #e6e6e6;
                         text-align: center; padding: 1rem 0; border-radius: var(--border-radius);
 
+                        &.selected{ 
+                            outline: 2px solid var(--black); 
+                        }
+
                         &:hover{ 
                             outline: 2px solid var(--black);
                             transition: 50ms ease-in;
@@ -106,14 +111,6 @@ const StyledProductDetails = styled.section`
 
                     @media(max-width: 969px){ max-width: none; }
 
-                    /* &.favourite{
-                        ${({ theme }) => theme.flexCenter}; 
-                        background-color: var(--primary-text-white);
-                        border: 1px solid var(--black); color: var(--black);
-                        margin-top: .5rem;
-
-                        .heart-icon{ margin-left: .5rem; }
-                    } */
                  }
             }
         }
@@ -123,6 +120,8 @@ const StyledProductDetails = styled.section`
 const ProductDetails = () => {
 
     const {query} = useRouter();
+
+    const [selectedSize, setSelectedSize] = useState(null); 
 
     const [productResults] = useQuery({
         query: GET_PRODUCT_QUERY,
@@ -140,8 +139,9 @@ const ProductDetails = () => {
         6.5, 7, 7.5, 8, 8.5, 9, 9.5,10, 10.5, 
         11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 
         15, 15.5, 16.5, 17
+    ];
 
-    ]
+    const { updateCart } = useCartContext();
 
     return (
         <Layout color={'black'}>
@@ -185,7 +185,13 @@ const ProductDetails = () => {
                                 {
                                     sizes.map((size, index)=>{
                                         return (
-                                            <li key={index} className="size-item">{size}</li>
+                                            <li 
+                                                key={index} 
+                                                className={`size-item ${size === selectedSize ? "selected" : ""}`}
+                                                onClick={() => setSelectedSize(size)}
+                                            >
+                                                {size}
+                                            </li>
                                         )
                                     })
                                 }
@@ -199,7 +205,19 @@ const ProductDetails = () => {
 
 
                         <div className="cta-wrapper">
-                            <button className="cta-btn">Add To Cart</button>
+                            <button 
+                                className="cta-btn"
+                                onClick={()=> updateCart({
+                                    size: selectedSize,
+                                    color: Color, 
+                                    gender: Gender, 
+                                    image: Image.data.attributes.formats.thumbnail.url, 
+                                    price: Price, 
+                                    title: Title
+                                })}
+                            >
+                                Add To Cart
+                            </button>
                         </div>
                         
                     </div>
