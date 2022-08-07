@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { CartItem } from "../components";
 import { Layout } from "../layout";
 
 const StyledCart = styled.section`
@@ -19,7 +20,7 @@ const StyledCart = styled.section`
                 justify-content: space-between;
             }
 
-            .customer-information{
+            .order-products-information{
                 width: 49%;
                 /* border: 1px solid red; */
 
@@ -31,6 +32,7 @@ const StyledCart = styled.section`
             .order-summary{
                 width: 350px;
                 @media (max-width:1023px){
+                    padding-top:50px;
                     width: 100%;  height: 49%; 
                 }
                 /* border: 1px solid green; */
@@ -88,10 +90,13 @@ const Cart = () => {
                 <h1 className="page-title">Shopping Cart</h1>
 
                 <div className="cart-wrapper">
-                    <div className="customer-information">
+                    <div className="order-products-information">
+                        
                         <p className="null-message">
                             You have no items in your bag
                         </p>
+
+                        <CartItem/>
                     </div>
 
                     <div className="order-summary">

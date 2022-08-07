@@ -31,7 +31,7 @@ const Layout = ({children, color}) => {
                     className="app-content" 
                     
                 >
-                    <StyledBlurBackground backgroundBlur={backgroundBlur}/>
+                    { backgroundBlur && <StyledBlurBackground backgroundBlur={backgroundBlur}/> }
                     <main className="main-container">
                         {children}
                     </main>  

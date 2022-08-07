@@ -3,6 +3,7 @@ import { Layout } from "../../layout";
 import { useQuery } from "urql";
 import {useRouter} from "next/router";
 import { GET_PRODUCT_QUERY } from "../../lib/query";
+import * as Icon from 'react-bootstrap-icons';
 
 const StyledProductDetails = styled.section`
     padding: 0;
@@ -96,6 +97,7 @@ const StyledProductDetails = styled.section`
 
             .cta-wrapper{
                 margin: 2rem 0;
+                
 
                 .cta-btn{
                     ${({ theme }) => theme.CTAButton};
@@ -104,11 +106,14 @@ const StyledProductDetails = styled.section`
 
                     @media(max-width: 969px){ max-width: none; }
 
-                    &.favourite{
+                    /* &.favourite{
+                        ${({ theme }) => theme.flexCenter}; 
                         background-color: var(--primary-text-white);
                         border: 1px solid var(--black); color: var(--black);
                         margin-top: .5rem;
-                    }
+
+                        .heart-icon{ margin-left: .5rem; }
+                    } */
                  }
             }
         }
@@ -128,7 +133,6 @@ const ProductDetails = () => {
 
     if(fetching) return <p>Loading....</p>
     if(error) return <p>{error.message}</p>
-    // console.log(data.products.data)
 
     const { Color, Description, Gender, Image, Price, Title}  = data.products.data[0].attributes;
     // console.log(Image.data.attributes.formats);
@@ -196,7 +200,6 @@ const ProductDetails = () => {
 
                         <div className="cta-wrapper">
                             <button className="cta-btn">Add To Cart</button>
-                            <button className="cta-btn favourite">Favourite</button>
                         </div>
                         
                     </div>

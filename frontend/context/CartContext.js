@@ -7,6 +7,7 @@ export function CartContextProvider({ children }) {
 
   const increaseQty = () => setQty((prevQty)=> (prevQty + 1));
   const decreaseQty = () => setQty((prevQty)=> (prevQty + 1))
+//   const talltTtl = () => 
 
   return (
     <CartContext.Provider value={{

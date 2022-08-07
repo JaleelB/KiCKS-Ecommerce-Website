@@ -10,6 +10,7 @@ const variables = css`
         --orange : #FF3D00; 
         --text-color-white: #fff;
         --black: #000;
+        --grey: #646464;
         --light-grey: #676767;
         --very-light-grey: #676767;
 

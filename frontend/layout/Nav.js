@@ -30,7 +30,7 @@ const Navbar = styled.div `
 
         .desktop-nav{
             list-style-type: none; justify-content: flex-start;
-            font-size: .8rem; padding: 12px 0 12px 5%; 
+            font-size: var(--ft-xs); padding: 12px 0 12px 5%; 
 
             .link-wrapper{
                 padding: 5px 12px;
@@ -53,12 +53,10 @@ const Navbar = styled.div `
                 .background-wrapper{
                     position:fixed;  bottom: 0; left: 0; border :1px solid red
                     width: 100vw; z-index: 2000; 
-                    // backdrop-filter: blur(8px);
                 }
                 .background{
-                    // position:absolute; top: -1rem;  bottom: 0; left: 0;
-                    width: min(75vw, 400px); height: 100vh; background-color: var(--primary-white);
-                    
+                    width: min(75vw, 400px); height: 100vh; 
+                    background-color: var(--primary-white);
                 }
 
                 .mobile-nav-links,.nav-link {
@@ -99,11 +97,19 @@ const Navbar = styled.div `
         .shopping-information{
             justify-content: flex-end; padding-right: 5%; 
 
+            div{
+                display: flex; align-items: center;
+                & > *{
+                    padding: 5px 8px; cursor: pointer;
+                    font-size: var(--ft-heading);
 
-            & > *{
-                padding: 5px 8px; cursor: pointer;
-                font-size: var(--ft-heading);
+                    &.icon-text{
+                        font-size: var(--ft-xs); font-weight: 500;
+                        padding:0; 
+                    }
+                } 
             }
+            
         }
 
 
@@ -243,20 +249,18 @@ const Nav = ({color}) => {
                 </div>
 
                 <div className="shopping-information">
-                    
-                    <Link className="watchlist" href='/watchlist'>
-                        <Icon.Heart className='action-icon' style={{fill: color && color}}/>
-                    </Link>
-
-                    <Link className="profile" href='/profile'>
-                        <Icon.People className='action-icon' style={{fill: color && color}}/>
-                    </Link>
 
                     <Link className="cart" href='/cart'>
-                        <Icon.Bag className='action-icon' style={{fill: color && color}}/>
+                    {/* <Icon.Bag className='action-icon' style={{fill: color && color}}/> */}
+                        <div>
+                            <Icon.Bag className='action-icon' style={{fill: color && color}}/>
+                            <div className="icon-text">Cart</div>
+                        </div>
                     </Link>
                     
                 </div>
+
+
             </div> 
         </Navbar>
     );

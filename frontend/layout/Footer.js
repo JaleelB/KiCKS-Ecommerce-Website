@@ -7,8 +7,7 @@ const StyledLink = styled.a`
 
 const StyledFooter = styled.section`
 
-    width: 100%; max-width: 1920px; 
-    margin-inline: auto;
+    width: 100%; margin-inline: auto;
     background-color: ${props => props.color};
 
     @media(max-width: 760px){padding: 40px 0;}

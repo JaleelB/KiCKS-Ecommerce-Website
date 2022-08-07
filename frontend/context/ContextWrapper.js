@@ -7,7 +7,6 @@ export const ContextWrapper = ({ children }) => {
         <NavContextProvider>
             {children}
         </NavContextProvider>
-      </CartContextProvider>
-       
+      </CartContextProvider> 
     );
 };
