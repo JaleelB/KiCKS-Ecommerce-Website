@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 
@@ -62,9 +63,10 @@ const StyledHeroSection = styled.section`
 
 const Hero = ({heroAsset}) => {
 
-    const {Title, Description, Image} = heroAsset?.attributes;
+    const {Title, Description, Image, Slug} = heroAsset?.attributes;
 
     return(
+        
         <StyledHeroSection>
             <div className='inner'>
 
@@ -86,7 +88,9 @@ const Hero = ({heroAsset}) => {
                 </div>
 
                 <div className="cta-wrapper">
-                    <button className="cta-button">Buy Now</button>
+                    <Link href={`/product/${Slug}`}>
+                        <button className="cta-button">Buy Now</button>
+                    </Link>
                 </div>
                 
                

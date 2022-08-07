@@ -49,6 +49,7 @@ const BestSellers = ({products, color}) => {
                                 image={product.attributes.Image.data.attributes.formats.thumbnail.url}
                                 price={product.attributes.Price}
                                 gender={product.attributes.Gender}
+                                slug={product.attributes.Slug}
                             />
                         )
                     })

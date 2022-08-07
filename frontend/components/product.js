@@ -11,7 +11,8 @@ const StyledProductCard = styled.a`
     flex: 0 0 calc(100% / var(--products-in-view) );  
     position: relative; aspect-ratio: 1;
     min-width: 300px; min-height: 300px; 
-    margin-bottom: 3.5rem;
+    margin-bottom: 3.5rem; text-decoration: none;
+
 
     @media (max-width: 1024px){
         margin-bottom: 5.5rem;
@@ -47,8 +48,12 @@ const StyledProductCard = styled.a`
 `;
 
 const Product = (props) => {
+
   return (
-    <StyledProductCard>
+    <StyledProductCard 
+        href={`/product/${props.slug}`}
+        style={{color: props.color}}
+    >
         <div className="product-inner">
             <div className="image-wrapper">
                 <img src={props.image} alt="product-image"/>

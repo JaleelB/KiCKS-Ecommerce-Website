@@ -3,6 +3,8 @@ import Link from 'next/link';
 import * as Icon from 'react-bootstrap-icons';
 import { NavMenuToggle } from './NavMenuToggle';
 import { motion, useCycle } from "framer-motion";
+import {useNavContext} from '../context/NavContext';
+import { useEffect } from 'react';
 
 const StyledNavLogo = styled.a`
     font-size:var(--ft-logo); font-weight: 500;
@@ -48,10 +50,15 @@ const Navbar = styled.div `
             nav{
                 position: relative; padding-left: 5%;
 
+                .background-wrapper{
+                    position:fixed;  bottom: 0; left: 0; border :1px solid red
+                    width: 100vw; z-index: 2000; 
+                    // backdrop-filter: blur(8px);
+                }
                 .background{
-                    position:absolute; top: -1rem;  bottom: 0; left: 0;
-                    width: 300px; height: 100vh; background-color: var(--primary-white);
-                    z-index: 2000;
+                    // position:absolute; top: -1rem;  bottom: 0; left: 0;
+                    width: min(75vw, 400px); height: 100vh; background-color: var(--primary-white);
+                    
                 }
 
                 .mobile-nav-links,.nav-link {
@@ -59,8 +66,9 @@ const Navbar = styled.div `
                 }
 
                 .mobile-nav-links{
-                    position: absolute;  z-index: 2000; 
-                    top: 5rem; width: 300px; 
+                    position: fixed;  z-index: 2000; 
+                    top: 6rem;  
+                    width: min(calc(75vw - 25px), 375px);
 
                     .link-wrapper {
                         list-style: none; margin-bottom: 20px; width: 100%;
@@ -95,7 +103,6 @@ const Navbar = styled.div `
             & > *{
                 padding: 5px 8px; cursor: pointer;
                 font-size: var(--ft-heading);
-
             }
         }
 
@@ -152,6 +159,12 @@ const Nav = ({color}) => {
 
     const [isOpen, toggleOpen] = useCycle(false, true);
 
+    const {setBackgroundBlur } = useNavContext();
+
+    useEffect(()=>{
+        setBackgroundBlur(isOpen);
+    },[isOpen])
+
     return(
         <Navbar>
             <div className="navbar-inner">
@@ -182,8 +195,11 @@ const Nav = ({color}) => {
                     <motion.nav
                         initial={false}
                         animate={isOpen ? "open" : "closed"}
-                    >
-                        <motion.div className="background" variants={sidebar} />
+                    >   
+                        <div className="background-wrapper" isOpen={isOpen}>
+                            <motion.div className="background" variants={sidebar} />
+                        </div>
+                        
 
                         <ul className="mobile-nav-links">
                             {

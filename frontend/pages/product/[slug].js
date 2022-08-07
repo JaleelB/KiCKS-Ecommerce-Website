@@ -31,11 +31,12 @@ const StyledProductDetails = styled.section`
                 }
 
                 .product-preview{
-
+                    max-width: 100px; max-height: 100px;
                     @media(max-width: 1023px){ display: none;}
                     
                     img{
-                        max-width: 100px; max-height: 100px;
+                        inline-size: 100%; object-fit: contain; 
+                        height: 100%; padding-inline: 5px;
                         border: 2px solid var(--black);
                         border-radius: var(--border-radius);
                     }
@@ -57,7 +58,8 @@ const StyledProductDetails = styled.section`
                 margin: 1rem 0; 
 
                 img{
-                    inline-size: 100%; object-fit: contain;
+                    inline-size: 100%; object-fit: contain; 
+                    height: 100%; padding-inline: 5px;
                     border: 2px solid var(--black); border-radius:  var(--border-radius);
                 }
             }
@@ -101,6 +103,12 @@ const StyledProductDetails = styled.section`
                     width: 100%;
 
                     @media(max-width: 969px){ max-width: none; }
+
+                    &.favourite{
+                        background-color: var(--primary-text-white);
+                        border: 1px solid var(--black); color: var(--black);
+                        margin-top: .5rem;
+                    }
                  }
             }
         }
@@ -137,7 +145,15 @@ const ProductDetails = () => {
                 <div className="inner">
                     <div className="image-container">
                         <div className="image-wrapper">
-                            <img src={Image.data.attributes.formats.medium.url} className="product-image-large" alt="product-image" />
+                            <img 
+                                src={
+                                    Image.data.attributes.formats.medium ? 
+                                    Image.data.attributes.formats.medium?.url :
+                                    Image.data.attributes.formats.small?.url
+                                } 
+                                className="product-image-large" 
+                                alt="product-image" 
+                            />
                             <div className="product-preview">
                                 <img src={Image.data.attributes.formats.thumbnail.url} alt="product-image" />
                             </div>
@@ -180,6 +196,7 @@ const ProductDetails = () => {
 
                         <div className="cta-wrapper">
                             <button className="cta-btn">Add To Cart</button>
+                            <button className="cta-btn favourite">Favourite</button>
                         </div>
                         
                     </div>
