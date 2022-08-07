@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import * as Icon from 'react-bootstrap-icons';
 import { useState } from "react";
+import { useCartContext } from "../context/CartContext";
 
 const StyledCartItem = styled.div`
     width: 100%; padding: .5rem; font-size: var(--ft-md);
@@ -48,7 +49,7 @@ const StyledCartItem = styled.div`
                 .quantity-select{
                     display: flex; gap: .5rem;
                 }
-                .icon{ color: var(--black)}
+                .icon{ color: var(--black); cursor: pointer; }
             }
         }
         
@@ -58,10 +59,12 @@ const StyledCartItem = styled.div`
 
 const CartItem = (props) => {
 
+    const { removeFromCart } = useCartContext();
+
     const [qty, setQty] = useState(1);
 
-    const increaseQty = () => setQty((prevQty)=> (prevQty + 1));
-    const decreaseQty = () => setQty((prevQty)=> (prevQty > 1 ? prevQty + 1 : 1))
+    const increaseQty = () => setQty((prevQty)=> prevQty + 1);
+    const decreaseQty = () => setQty((prevQty)=> (prevQty > 1 ? prevQty - 1 : 1))
 
     return (
         <StyledCartItem>
@@ -97,7 +100,7 @@ const CartItem = (props) => {
                             <p className="quantity icon">{qty}</p>
                             <Icon.PlusCircleFill onClick={increaseQty}/>
                         </div>
-                        <div className="remove-item icon"><Icon.Trash3/></div>
+                        <div className="remove-item icon" onClick={()=> removeFromCart(props.id)}><Icon.Trash3/></div>
                     </div>
                 </div>
             </div>

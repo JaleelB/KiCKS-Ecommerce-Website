@@ -5,6 +5,7 @@ import {useRouter} from "next/router";
 import { GET_PRODUCT_QUERY } from "../../lib/query";
 import { useState } from "react";
 import { useCartContext } from "../../context/CartContext";
+import { v4 as uuidv4 } from 'uuid';
 
 const StyledProductDetails = styled.section`
     padding: 0;
@@ -133,7 +134,7 @@ const ProductDetails = () => {
     if(fetching) return <p>Loading....</p>
     if(error) return <p>{error.message}</p>
 
-    const { Color, Description, Gender, Image, Price, Title}  = data.products.data[0].attributes;
+    const { Color, Description, Gender, Image, Price, Title, Slug}  = data.products.data[0].attributes;
     // console.log(Image.data.attributes.formats);
     const sizes = [
         6.5, 7, 7.5, 8, 8.5, 9, 9.5,10, 10.5, 
@@ -141,7 +142,7 @@ const ProductDetails = () => {
         15, 15.5, 16.5, 17
     ];
 
-    const { updateCart } = useCartContext();
+    const { addToCart } = useCartContext();
 
     return (
         <Layout color={'black'}>
@@ -207,13 +208,14 @@ const ProductDetails = () => {
                         <div className="cta-wrapper">
                             <button 
                                 className="cta-btn"
-                                onClick={()=> updateCart({
+                                onClick={()=> addToCart({
                                     size: selectedSize,
                                     color: Color, 
                                     gender: Gender, 
                                     image: Image.data.attributes.formats.thumbnail.url, 
                                     price: Price, 
-                                    title: Title
+                                    title: Title,
+                                    id: uuidv4()
                                 })}
                             >
                                 Add To Cart

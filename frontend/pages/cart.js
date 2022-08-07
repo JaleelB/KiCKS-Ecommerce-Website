@@ -105,6 +105,7 @@ const Cart = () => {
                                         image={cartItem.image} 
                                         price={cartItem.price }
                                         title={cartItem.title}
+                                        id={cartItem.id}
                                     />
                                 )
                             })

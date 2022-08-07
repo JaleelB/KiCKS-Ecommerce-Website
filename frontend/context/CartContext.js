@@ -3,13 +3,15 @@ import { createContext, useContext, useEffect, useState } from 'react';
 const CartContext = createContext();
 
 export function CartContextProvider({ children }) {
-  const [qty, setQty] = useState(1);
+
   const [cart, setCart] = useState([]);
 
-  const increaseQty = () => setQty((prevQty)=> (prevQty + 1));
-  const decreaseQty = () => setQty((prevQty)=> (prevQty + 1))
+  const addToCart = (newProduct) => setCart([...cart, newProduct]);
 
-  const updateCart = (newProduct) => setCart([...cart, newProduct])
+  const removeFromCart = (id) => {
+      const updatedCart = cart.filter(cartItem => cartItem['id'] !== id );
+      setCart(updatedCart)
+  }
 //   const talltTtl = () => 
 //use session storage top store cart information
 
@@ -19,8 +21,7 @@ export function CartContextProvider({ children }) {
 
   return (
     <CartContext.Provider value={{
-        increaseQty, decreaseQty,
-        updateCart, cart
+        addToCart, cart, removeFromCart
     }}>
       {children}
     </CartContext.Provider>

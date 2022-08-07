@@ -18,7 +18,8 @@
     "react-bootstrap-icons": "^1.8.4",
     "react-dom": "18.2.0",
     "styled-components": "^5.3.5",
-    "urql": "^2.2.3"
+    "urql": "^2.2.3",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "eslint": "8.20.0",
