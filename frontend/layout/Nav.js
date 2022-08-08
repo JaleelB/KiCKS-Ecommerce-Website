@@ -5,6 +5,7 @@ import { NavMenuToggle } from './NavMenuToggle';
 import { motion, useCycle } from "framer-motion";
 import {useNavContext} from '../context/NavContext';
 import { useEffect } from 'react';
+import { useCartContext } from '../context/CartContext';
 
 const StyledNavLogo = styled.a`
     font-size:var(--ft-logo); font-weight: 500;
@@ -101,13 +102,24 @@ const Navbar = styled.div `
                 display: flex; align-items: center;
                 & > *{
                     padding: 5px 8px; cursor: pointer;
-                    font-size: var(--ft-heading);
+                    font-size: 2.2rem;
 
                     &.icon-text{
                         font-size: var(--ft-xs); font-weight: 500;
                         padding:0; 
                     }
                 } 
+
+                .shopping-icon{
+                    display: flex; align-items:center; position: relative;
+                    padding: 0;
+
+                    .cart-total{
+                        position: absolute; top: .5rem; left: .4rem;
+                        font-size: var(--ft-xxs);
+                    }
+                }
+
             }
             
         }
@@ -166,6 +178,7 @@ const Nav = ({color}) => {
     const [isOpen, toggleOpen] = useCycle(false, true);
 
     const { setBackgroundBlur } = useNavContext();
+    const {ttlItems} = useCartContext();
 
     useEffect(()=>{
         setBackgroundBlur(isOpen);
@@ -251,9 +264,12 @@ const Nav = ({color}) => {
                 <div className="shopping-information">
 
                     <Link className="cart" href='/cart'>
-                    {/* <Icon.Bag className='action-icon' style={{fill: color && color}}/> */}
                         <div>
-                            <Icon.Bag className='action-icon' style={{fill: color && color}}/>
+                            <div className="shopping-icon">
+                                <Icon.Bag className='action-icon' style={{fill: color && color}} itemsInCart={ttlItems}/>
+                                <p className="cart-total">{ttlItems}</p>
+                            </div>
+                            
                             <div className="icon-text">Cart</div>
                         </div>
                     </Link>

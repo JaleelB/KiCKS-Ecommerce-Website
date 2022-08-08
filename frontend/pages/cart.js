@@ -85,94 +85,94 @@ const Cart = () => {
 
     const feesTitles = ['Subtotal', 'Estimated Shipping & Handling', 'Estimated Tax', 'Discount', 'Total'];
 
-    const { cart } = useCartContext();
+    const { cart, ttlCost } = useCartContext();
 
-  return (
-    <Layout color="black">
-        <StyledCart>
-            <div className="inner">
-                <h1 className="page-title">Shopping Cart</h1>
+    return (
+        <Layout color="black">
+            <StyledCart>
+                <div className="inner">
+                    <h1 className="page-title">Shopping Cart</h1>
 
-                <div className="cart-wrapper">
-                    <div className="order-products-information">
+                    <div className="cart-wrapper">
+                        <div className="order-products-information">
 
-                        {cart.length === 0 && <p className="null-message"> You have no items in your bag </p>}
-                        { cart.length > 0 &&
-                            cart.map((cartItem)=>{
-                                return (
-                                    <CartItem
-                                        key={uuidv4()}
-                                        size={cartItem.size}
-                                        color={cartItem.color}
-                                        gender={cartItem.gender}
-                                        image={cartItem.image} 
-                                        price={cartItem.price }
-                                        title={cartItem.title}
-                                        id={cartItem.id}
-                                        qty={cartItem.quantity}
-                                        slug={cartItem.slug}
-                                    />
-                                )
-                            })
-                        }
-                        
-                    </div>
+                            {cart.length === 0 && <p className="null-message"> You have no items in your bag </p>}
+                            { cart.length > 0 &&
+                                cart.map((cartItem)=>{
+                                    return (
+                                        <CartItem
+                                            key={uuidv4()}
+                                            size={cartItem.size}
+                                            color={cartItem.color}
+                                            gender={cartItem.gender}
+                                            image={cartItem.image} 
+                                            price={cartItem.price }
+                                            title={cartItem.title}
+                                            id={cartItem.id}
+                                            qty={cartItem.quantity}
+                                            slug={cartItem.slug}
+                                        />
+                                    )
+                                })
+                            }
+                            
+                        </div>
 
-                    <div className="order-summary">
-                        <h2 className="order-summary-header">Order Summary</h2>
+                        <div className="order-summary">
+                            <h2 className="order-summary-header">Order Summary</h2>
 
-                        <div className="order-pricing-wrapper">
-                            <h3 className="promo-code-question">
-                                Do you have a promo code?
-                            </h3>
+                            <div className="order-pricing-wrapper">
+                                <h3 className="promo-code-question">
+                                    Do you have a promo code?
+                                </h3>
 
-                            <div className="fees-wrapper">
-                                {
+                                <div className="fees-wrapper">
+                                    {
 
-                                    feesTitles.map((title) => {
-                                        return (
-                                            <div 
-                                                key={uuidv4()}
-                                                className={
-                                                    `
-                                                    fee 
-                                                    ${
-                                                        title==="Subtotal" ? 'subtotal':
-                                                        title === "Estimated Shipping & Handling" ? "shipping":
-                                                        title === "Estimated Tax" ? "tax":
-                                                        title === "Discount" ? "discount":
-                                                        "total"
+                                        feesTitles.map((title) => {
+                                            return (
+                                                <div 
+                                                    key={uuidv4()}
+                                                    className={
+                                                        `
+                                                        fee 
+                                                        ${
+                                                            title==="Subtotal" ? 'subtotal':
+                                                            title === "Estimated Shipping & Handling" ? "shipping":
+                                                            title === "Estimated Tax" ? "tax":
+                                                            title === "Discount" ? "discount":
+                                                            "total"
+                                                        }
+                                                        `
+                                                        
                                                     }
-                                                    `
-                                                    
-                                                }
-                                            >
-                                                <p className="title">{title}</p>
-                                                <p className="price">$0.00</p>
-                                            </div> 
-                                        )
-                                    })
-                                   
-                                }
-                                
+                                                >
+                                                    <p className="title">{title}</p>
+                                                    <p className="price">${ttlCost ? ttlCost : '0.00'}</p>
+                                                </div> 
+                                            )
+                                        })
+                                    
+                                    }
+                                    
+                                </div>
+
+
+                                <div className="billing-cta-wrapper">
+                                    <button className="cta-btn checkout">Checkout</button>
+                                    <button className="cta-btn paypal">Paypal</button>
+                                    <button className="cta-btn apple-pay">Apple Pay</button>
+                                </div>
+
                             </div>
-
-
-                            <div className="billing-cta-wrapper">
-                                <button className="cta-btn checkout">Checkout</button>
-                                <button className="cta-btn paypal">Paypal</button>
-                                <button className="cta-btn apple-pay">Apple Pay</button>
-                            </div>
-
                         </div>
                     </div>
+                    
                 </div>
-                
-            </div>
-        </StyledCart>
-        
-    </Layout>
-  )
+            </StyledCart>
+            
+        </Layout>
+    )
 }
 
 export default Cart;

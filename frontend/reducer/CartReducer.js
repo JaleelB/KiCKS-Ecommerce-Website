@@ -36,9 +36,6 @@ export const CartReducer = (state, action) => {
                 
             }
 
-            console.log(removeIndex)
-
-
             return{
                 ...state,
                 cart: [...state.cart.slice(0, removeIndex), ...state.cart.slice(removeIndex + 1)]
