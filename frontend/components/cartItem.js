@@ -99,9 +99,13 @@ const CartItem = (props) => {
 
                     <div className="item-actions">
                         <div className="quantity-select icon">
-                            <Icon.DashCircleFill onClick={decreaseQty}/>
+                            <Icon.DashCircleFill 
+                                onClick={()=> dispatch({type: 'decrease-cart-item', payload: {slug: props.slug, size: props.size}})}
+                            />
                             <p className="quantity icon">{qty}</p>
-                            <Icon.PlusCircleFill onClick={increaseQty}/>
+                            <Icon.PlusCircleFill 
+                                onClick={()=> dispatch({type: 'increase-cart-item', payload: {slug: props.slug, size: props.size}})}
+                            />
                         </div>
                         <div 
                             className="remove-item icon" 
