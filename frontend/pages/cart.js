@@ -3,6 +3,7 @@ import { CartItem } from "../components";
 import { useCartContext } from "../context/CartContext";
 import { Layout } from "../layout";
 import { v4 as uuidv4 } from 'uuid';
+import getStripe from "../lib/getStripe";
 
 const StyledCart = styled.section`
 
@@ -85,7 +86,20 @@ const Cart = () => {
 
     const feesTitles = ['Subtotal', 'Estimated Shipping & Handling', 'Estimated Tax', 'Discount', 'Total'];
 
+    //cart details
     const { cart, ttlCost } = useCartContext();
+
+    //stripe payment
+    const handleCheckout = async() => {
+        const stripe = await getStripe();
+        const response = await fetch('/api/stripe', {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(cart)
+        })
+        const data = await response.json();
+        await stripe.redirectToCheckout({sessionId: data.id});
+    }
 
     return (
         <Layout color="black">
@@ -148,7 +162,7 @@ const Cart = () => {
                                                     }
                                                 >
                                                     <p className="title">{title}</p>
-                                                    <p className="price">${ttlCost ? ttlCost : '0.00'}</p>
+                                                    <p className="price">${ttlCost && title === 'Total' ? ttlCost : '0.00'}</p>
                                                 </div> 
                                             )
                                         })
@@ -159,7 +173,7 @@ const Cart = () => {
 
 
                                 <div className="billing-cta-wrapper">
-                                    <button className="cta-btn checkout">Checkout</button>
+                                    <button className="cta-btn checkout" onClick={handleCheckout}>Checkout</button>
                                     <button className="cta-btn paypal">Paypal</button>
                                     <button className="cta-btn apple-pay">Apple Pay</button>
                                 </div>

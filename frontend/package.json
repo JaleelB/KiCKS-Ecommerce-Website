@@ -11,12 +11,15 @@
   "dependencies": {
     "@bootstrap-styled/provider": "^2.0.3",
     "@bootstrap-styled/v4": "^3.4.0",
+    "@stripe/react-stripe-js": "^1.10.0",
+    "@stripe/stripe-js": "^1.35.0",
     "babel-plugin-styled-components": "^2.0.7",
     "framer-motion": "^6.5.1",
     "next": "12.2.3",
     "react": "18.2.0",
     "react-bootstrap-icons": "^1.8.4",
     "react-dom": "18.2.0",
+    "stripe": "^10.0.0",
     "styled-components": "^5.3.5",
     "urql": "^2.2.3",
     "uuid": "^8.3.2"

@@ -36,6 +36,7 @@ export function CartContextProvider({ children }) {
 
     useEffect(()=>{
         getTtlItemsInCart();
+        getTotalCost();
         sessionStorage.setItem(PREFIX + "cart", JSON.stringify(state.cart))
     },[state.cart])
 
