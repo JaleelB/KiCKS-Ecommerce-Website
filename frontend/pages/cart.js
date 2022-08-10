@@ -98,6 +98,7 @@ const Cart = () => {
             body: JSON.stringify(cart)
         })
         const data = await response.json();
+        console.log(data.id);
         await stripe.redirectToCheckout({sessionId: data.id});
     }
 

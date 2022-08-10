@@ -17,8 +17,8 @@ export const NavMenuToggle = ({ toggle, toggleValue, color }) => (
         onClick={toggle} 
         style={{
           left: toggleValue ? '2rem' : '1rem', 
-          top: toggleValue ? '2rem' : '-.05rem',
-          position: toggleValue && 'fixed'
+          top: toggleValue ? '1rem' : '-.05rem',
+          // position: toggleValue && 'fixed'
         }}
     >
     <svg width="10" height="10" viewBox="0 0 23 23">

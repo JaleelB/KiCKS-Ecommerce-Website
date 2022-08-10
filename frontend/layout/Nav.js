@@ -215,7 +215,7 @@ const Nav = ({color}) => {
                         initial={false}
                         animate={isOpen ? "open" : "closed"}
                     >   
-                        <div className="background-wrapper" isOpen={isOpen}>
+                        <div className="background-wrapper">
                             <motion.div className="background" variants={sidebar} />
                         </div>
                         
@@ -266,7 +266,7 @@ const Nav = ({color}) => {
                     <Link className="cart" href='/cart'>
                         <div>
                             <div className="shopping-icon">
-                                <Icon.Bag className='action-icon' style={{fill: color && color}} itemsInCart={ttlItems}/>
+                                <Icon.Bag className='action-icon' style={{fill: color && color}}/>
                                 <p className="cart-total">{ttlItems}</p>
                             </div>
                             

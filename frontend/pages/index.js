@@ -15,7 +15,6 @@ export default function Home() {
   
   const products = data?.products?.data;
 
-  console.log(products)
 
   return  (
       <Layout color="white">

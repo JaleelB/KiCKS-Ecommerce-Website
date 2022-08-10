@@ -130,19 +130,19 @@ const ProductDetails = () => {
     })
 
     const {data, fetching, error} = productResults;
-
-    if(fetching) return <p>Loading....</p>
-    if(error) return <p>{error.message}</p>
-
-    const { Color, Description, Gender, Image, Price, Title, Slug}  = data.products.data[0].attributes;
-    // console.log(Image.data.attributes.formats);
+    
     const sizes = [
         6.5, 7, 7.5, 8, 8.5, 9, 9.5,10, 10.5, 
         11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 
         15, 15.5, 16.5, 17
     ];
 
-    const { addToCart, dispatch } = useCartContext();
+    const { dispatch } = useCartContext();
+
+    if(fetching) return <p>Loading....</p>
+    if(error) return <p>{error.message}</p>
+
+    const { Color, Description, Gender, Image, Price, Title, Slug}  = data.products.data[0].attributes;
 
     return (
         <Layout color={'black'}>
@@ -208,18 +208,7 @@ const ProductDetails = () => {
                         <div className="cta-wrapper">
                             <button 
                                 className="cta-btn"
-                                onClick={()=> 
-                                    // addToCart({
-                                    //     size: selectedSize,
-                                    //     color: Color, 
-                                    //     gender: Gender, 
-                                    //     image: Image.data.attributes.formats.thumbnail.url, 
-                                    //     price: Price, 
-                                    //     title: Title,
-                                    //     id: uuidv4(),
-                                    //     quantity: 1
-                                    // }
-
+                                onClick={()=>
                                     dispatch( {
                                         type: 'add-item-to-cart', payload: {
                                             size: selectedSize,
