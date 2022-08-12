@@ -14,17 +14,27 @@ export default async function handler(request, response){
                     
                     allowed_countries: ['US', 'CA']
                 },
+                allow_promotion_codes: true,
+
+                shipping_options: [
+                    {shipping_rate: 'shr_1LVo7fCBJx4bJphGaufId4iw'}
+                ],
                 line_items: request.body.map(product => {
                     
                     return {
                         price_data: {
-                            country: 'usd',
+                            currency: 'usd',
                             product_data: {
                                 name: product.title,
                                 images: [product.image]
                             },
                             unit_amount: product.price * 100,
                         }, 
+                        adjustable_quantity: {
+                            enabled: true,
+                            minimum: 1,
+                            maximum: 6
+                        },
                         quantity: product.quantity
                     }
                 }),
@@ -35,7 +45,7 @@ export default async function handler(request, response){
             })
 
             //returns stripe session on successful payment
-            response.staus(200).json(session)
+            response.status(200).json(session)
         }catch(error){
             response.status(error.statusCode || 500).json(error.message)
         }

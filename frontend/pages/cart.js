@@ -92,13 +92,15 @@ const Cart = () => {
     //stripe payment
     const handleCheckout = async() => {
         const stripe = await getStripe();
+        
         const response = await fetch('/api/stripe', {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify(cart)
         })
+
         const data = await response.json();
-        console.log(data.id);
+        
         await stripe.redirectToCheckout({sessionId: data.id});
     }
 
