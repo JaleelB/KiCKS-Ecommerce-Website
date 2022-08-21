@@ -6,6 +6,10 @@ const mixins = {
         display: flex; justify-content: center; align-items: center;
     `,
 
+    flexVerticalCenter: css`
+        display: flex; align-items: center;
+    `,
+
     flexColumn: css`
         display: flex; flex-direction: column;
     `,
