@@ -13,9 +13,9 @@ const StyledBestSellers = styled.section`
 
         .best-sellers-carousel{
 
-            display: grid;  gap: 8px;
+            display: flex;  gap: 8px;
             overflow-x: auto; overflow-y: hidden;
-            grid-auto-flow: column; 
+            /* grid-auto-flow: column;  */
             //grid-auto-columns: 25%;
 
             /* @media (max-width: 1024px){
@@ -28,7 +28,7 @@ const StyledBestSellers = styled.section`
 
 const BestSellers = ({products, color}) => {
 
-  const bestSellingProducts = products.filter(product => product.attributes.Rating >= 9);
+  const bestSellingProducts = products.filter(product => product.attributes.Rating >= 9.1);
 
   return (
     <StyledBestSellers>

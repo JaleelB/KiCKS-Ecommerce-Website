@@ -3,15 +3,17 @@ import styled from "styled-components";
 const StyledProductCard = styled.a`
 
     --card-margin: .5rem; 
+    
+    @media(max-width: 539px){--products-in-view: 1;}
+    @media(min-width: 540px ) and (max-width: 960px){--products-in-view: 2;}
+    @media(min-width: 961px) {--products-in-view: 3;}
+    /* @media(min-width: 1921px){--products-in-view: 4;} */
 
-    @media(max-width: 960px){--products-in-view: 2;}
-    @media(min-width: 961px) and (max-width: 1920px){--products-in-view: 3;}
-    @media(min-width: 1921px){--products-in-view: 4.05;}
-
-    flex: 0 0 calc(100% / var(--products-in-view) );  
-    position: relative; aspect-ratio: 1;
-    min-width: 300px; min-height: 300px; 
-    margin-bottom: 3.5rem; text-decoration: none;
+    flex: 0 0 calc((100% / calc(var(--products-in-view)) - 10px));  
+    position: relative; aspect-ratio: 1; margin-inline: 5px;
+    /* min-width: 200px; min-height:200px;  */
+    max-width: calc((100% / calc(var(--products-in-view)) - 10px));  
+    margin-bottom: 4.5rem; text-decoration: none;
 
 
     @media (max-width: 1024px){
@@ -24,7 +26,6 @@ const StyledProductCard = styled.a`
         .image-wrapper{
             width: 100%; height: 100%; padding: var(--card-margin);
             ${({ theme }) => theme.flexCenter}
-            background-color: #202020;
 
             img{
                 inline-size: 90%; object-fit: contain; margin-inline: auto;
@@ -40,7 +41,7 @@ const StyledProductCard = styled.a`
                 gap: 8px;
             }
 
-            .product-title{ color: var(--orange); margin-bottom: .4rem; }
+            .product-title{ color: var(--orange); margin: .4rem 0; max-width: 200px;}
                     
         }
     }

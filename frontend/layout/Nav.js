@@ -137,7 +137,7 @@ const Navbar = styled.div `
 const Nav = ({color}) => {
 
     const links = [`Men's`, `Women's`, `Kid's`];
-    const urlPaths = [`men`, `women`, `kid`];
+    const urlPaths = [`men`, `women`, `kids`];
     
     const sidebar = {
         open: (height = 1000) => ({
@@ -198,7 +198,7 @@ const Nav = ({color}) => {
                                 >
                                     <Link 
                                         className="nav-link"
-                                        href={`/${urlPaths[index]}`}
+                                        href={`/productsresult/${urlPaths[index]}`}
                                         
                                     >
                                         {link}
@@ -231,7 +231,7 @@ const Nav = ({color}) => {
                                             key={index}
                                             style={{pointerEvents: !isOpen && 'none'}}
                                         >
-                                            <Link className="nav-link" href={`/${urlPaths[index]}`}>
+                                            <Link className="nav-link" href={`/productsresult/${urlPaths[index]}`}>
                                                 <div>
                                                     {link}
                                                     <Icon.ChevronRight/>

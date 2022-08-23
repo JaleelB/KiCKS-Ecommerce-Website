@@ -177,8 +177,8 @@ const Cart = () => {
 
                                 <div className="billing-cta-wrapper">
                                     <button className="cta-btn checkout" onClick={handleCheckout}>Checkout</button>
-                                    <button className="cta-btn paypal">Paypal</button>
-                                    <button className="cta-btn apple-pay">Apple Pay</button>
+                                    <button className="cta-btn paypal" disabled>Paypal</button>
+                                    <button className="cta-btn apple-pay" disabled>Apple Pay</button>
                                 </div>
 
                             </div>
