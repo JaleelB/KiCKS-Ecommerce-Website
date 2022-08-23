@@ -40,16 +40,17 @@ const StyledFilterBar = styled.div`
   list-style: none; padding: 20px 10%;
   border-top: 2px solid var(--primary-black);
   border-bottom: 2px solid var(--primary-black);
-  flex-wrap: wrap;
+  flex-wrap: wrap; 
 
   ${({theme}) => theme.flexSpaceBetween}
 
   @media(max-width: 480px){ padding-inline: 1rem; }
 
   .product-types{
+    
     span{ 
-      padding: .8rem 1rem; cursor: pointer;
-      @media(max-width: 480px){ padding-inline: .6rem; }
+       cursor: pointer; padding-right: 1rem;
+      @media(max-width: 480px){ padding-right: .6rem; }
     }
   }
 
@@ -71,9 +72,7 @@ const StyledFilterBar = styled.div`
 
     .dropdown-content{
       ${({theme}) => theme.flexColumn}
-      /* display: flex; flex-wrap: wrap; */
       position: absolute; margin-top: 10px;
-      /* display: ${props => props.isdown || "none"}; */
       background-color: #f9f9f9; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       min-width: 160px; z-index: 1;
 
@@ -90,7 +89,7 @@ const ProductsResult = () => {
   const filterOptions = ['Discover', 'Latest', 'Sale'];
   const sortByOptions = ['Lowest Price', 'Highest Price'];
   const [productResults] = useQuery({query: PRODUCT_QUERY});
-  const [filterBy, setFilterBy] = useState('');
+  const [sortBy, setSortBy] = useState('');
   const [dropDown, setDropDown] = useState(false);
 
   const {query} = useRouter();
@@ -154,7 +153,7 @@ const ProductsResult = () => {
                   {
                       sortByOptions.map((option, index)=>{
                           return (
-                            <div key={index} >{option}</div>
+                            <div key={index} onClick={() => setSortBy(option)}>{option}</div>
                           )
                       })
                   }
@@ -172,6 +171,7 @@ const ProductsResult = () => {
                 'Kid'
               } 
               filterBy='discover'
+              sortBy={sortBy}
             />
 
           </div>

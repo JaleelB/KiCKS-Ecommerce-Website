@@ -12,10 +12,14 @@ const StyledProductCatalog = styled.div`
     }
 `;
 
-const ProductCatalog = ({products, filter, filterBy}) => {
+
+const ProductCatalog = ({products, filter, sortBy}) => {
 
     const filteredProductsArray = products.filter((product)=> product.attributes.Gender === filter);
-    console.log(filteredProductsArray)
+
+    if(sortBy === 'Lowest Price') filteredProductsArray.sort((a, b) => a.attributes.Price - b.attributes.Price);
+    else if(sortBy === 'Highest Price') filteredProductsArray.sort((a, b) => b.attributes.Price - a.attributes.Price);
+
   return (
     <StyledProductCatalog>
          {
