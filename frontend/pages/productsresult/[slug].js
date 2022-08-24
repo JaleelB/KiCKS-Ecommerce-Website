@@ -11,10 +11,16 @@ const StyledMensPage = styled.section`
   .inner{
     width: 100%;
     .title{
-      text-transform: uppercase;
-       margin-bottom: 2rem; padding-left: 10%; 
-       @media(max-width: 950px){ text-align: center; padding: 0; }
+      text-transform: uppercase; margin-bottom: 2rem;
       }
+
+    .catalog-header{
+      ${({theme}) => theme.flexSpaceBetween}
+      padding-inline: 10%; 
+      @media(max-width: 480px){ 
+        ${({theme}) => theme.flexColumn}; 
+      }
+    }
   }
 `;
 
@@ -36,23 +42,7 @@ const StyledMensPageBanner = styled.div`
   }
 `;
 
-const StyledFilterBar = styled.div`
-  list-style: none; padding: 20px 10%;
-  border-top: 2px solid var(--primary-black);
-  border-bottom: 2px solid var(--primary-black);
-  flex-wrap: wrap; 
-
-  ${({theme}) => theme.flexSpaceBetween}
-
-  @media(max-width: 480px){ padding-inline: 1rem; }
-
-  .product-types{
-    
-    span{ 
-       cursor: pointer; padding-right: 1rem;
-      @media(max-width: 480px){ padding-right: .6rem; }
-    }
-  }
+const StyledFilterDropdown = styled.div`
 
   .filter-dropdown{
     position: relative; display: inline-block;
@@ -81,6 +71,8 @@ const StyledFilterBar = styled.div`
         &:hover{ background-color: #f1f1f1; }
       }
     }
+
+    
   }
 `
 
@@ -120,7 +112,7 @@ const ProductsResult = () => {
             (
               <>
                 <h1>Kid's Shoes & Sneakers</h1>
-                <img src="https://images.pexels.com/photos/7776154/pexels-photo-7776154.jpeg?cs=srgb&dl=pexels-pavel-danilyuk-7776154.jpg&fm=jpg" alt="" />
+                <img src="https://images.pexels.com/photos/5623677/pexels-photo-5623677.jpeg?cs=srgb&dl=pexels-allan-mas-5623677.jpg&fm=jpg" alt="" />
               </>
             )
           }
@@ -129,46 +121,41 @@ const ProductsResult = () => {
       <StyledMensPage>
         
         <div className="inner">
-          <h2 className="title">SHOP ALL {query.slug}'S STYLES</h2>
+
+          <div className="catalog-header">
+
+            <h2 className="title">SHOP ALL {query.slug}'S STYLES</h2>
+            <StyledFilterDropdown>
+
+                <div className="filter-dropdown">
+                  <span className="dropdown-btn" onClick={()=> setDropDown(!dropDown)}>
+                    Sort by
+                    <ChevronDown className="icon"/>
+                  </span>
+
+                  <div className="dropdown-content" style={{display: dropDown ? 'block' : 'none'}}>
+                    {
+                        sortByOptions.map((option, index)=>{
+                            return (
+                              <div key={index} onClick={() => setSortBy(option)}>{option}</div>
+                            )
+                        })
+                    }
+                  </div>
+                  
+                </div>
+              </StyledFilterDropdown>
+
+            </div>
 
           <div className="product-catalog">
-            <StyledFilterBar>
-              <div className="product-types">
-                {
-                    filterOptions.map((option, index) => {
-                        return (
-                          <span key={index}>{option}</span>
-                        )
-                    })
-                }
-              </div>
-
-              <div className="filter-dropdown">
-                <span className="dropdown-btn" onClick={()=> setDropDown(!dropDown)}>
-                  Sort by
-                  <ChevronDown className="icon"/>
-                </span>
-
-                <div className="dropdown-content" style={{display: dropDown ? 'block' : 'none'}}>
-                  {
-                      sortByOptions.map((option, index)=>{
-                          return (
-                            <div key={index} onClick={() => setSortBy(option)}>{option}</div>
-                          )
-                      })
-                  }
-                </div>
-                
-              </div>
-            </StyledFilterBar>
-
-
+            
             <ProductCatalog 
               products={data.products.data} 
               filter={
                 query.slug  === 'men' ? "Men":
                 query.slug  === 'women' ? "Women":
-                'Kid'
+                'Kids'
               } 
               filterBy='discover'
               sortBy={sortBy}
