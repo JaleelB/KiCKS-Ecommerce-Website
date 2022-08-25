@@ -26,7 +26,7 @@ query{
 
 export const GET_PRODUCT_QUERY =  `
   query getPtoducts($slug: String!){
-    products(filters: {Slug: {eq: $slug}}){
+    products(filters: {Slug: {eq: $slug}}, pagination: { limit: 100 }){
       data{
         attributes{
           Color

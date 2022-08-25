@@ -1,14 +1,20 @@
-import { Profiler } from 'react';
 import Stripe from 'stripe';
 const stripe = new Stripe(`${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`);
+import { getSession } from '@auth0/nextjs-auth0';
 
 export default async function handler(request, response){
+
+    const session = getSession(request, response);
+    const user = session?.user;
+    const stripeID = user['http://localhost:3000/stripe_customer_id'];
+
     if(request.method === "POST"){
         try{
             //create checkput session
             const session = await stripe.checkout.sessions.create({
                 submit_type: 'pay',
                 mode: 'payment',
+                customer: stripeID,
                 payment_method_types: ['card', 'klarna'],
                 shipping_address_collection: {
                     

@@ -165,7 +165,7 @@ const Cart = () => {
                                                     }
                                                 >
                                                     <p className="title">{title}</p>
-                                                    <p className="price">${ttlCost && title === 'Total' ? ttlCost : '0.00'}</p>
+                                                    <p className="price">${ttlCost && title === 'Total' || title === 'Subtotal' ? ttlCost : '0.00'}</p>
                                                 </div> 
                                             )
                                         })

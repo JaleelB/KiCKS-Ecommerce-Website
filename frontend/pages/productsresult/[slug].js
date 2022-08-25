@@ -78,7 +78,6 @@ const StyledFilterDropdown = styled.div`
 
 const ProductsResult = () => {
 
-  const filterOptions = ['Discover', 'Latest', 'Sale'];
   const sortByOptions = ['Lowest Price', 'Highest Price'];
   const [productResults] = useQuery({query: PRODUCT_QUERY});
   const [sortBy, setSortBy] = useState('');

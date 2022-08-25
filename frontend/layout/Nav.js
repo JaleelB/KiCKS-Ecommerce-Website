@@ -6,6 +6,9 @@ import { motion, useCycle } from "framer-motion";
 import {useNavContext} from '../context/NavContext';
 import { useEffect } from 'react';
 import { useCartContext } from '../context/CartContext';
+import { UserProfile } from '../components';
+import { useUser } from '@auth0/nextjs-auth0';
+import { useRouter } from 'next/router';
 
 const StyledNavLogo = styled.a`
     font-size:var(--ft-logo); font-weight: 500;
@@ -66,7 +69,7 @@ const Navbar = styled.div `
 
                 .mobile-nav-links{
                     position: fixed;  z-index: 2000; 
-                    top: 6rem;  
+                    top: 6rem;  height: 90%;
                     width: min(calc(75vw - 25px), 375px);
 
                     .link-wrapper {
@@ -79,8 +82,22 @@ const Navbar = styled.div `
                             display: flex; align-items: center; 
                             justify-content: space-between; width: 100%;
                         } 
-                           
+
+                        &.btn{
+                            position: absolute; bottom: 2rem;
+                            // a{
+                                button{
+                                    color: var(--text-color-white); background-color: var(--black);
+                                    min-width: 150px; width: 85%; max-width: 500px; min-height: 30px;
+                                    font-size: var(--ft-lg); font-family: var(--font-mono); appearance: none;
+                                    line-height: 1; text-decoration: none;  cursor:pointer; border: none;
+                                    cursor: pointer; transition: var(--transition); padding: .8rem 1.75rem;
+                                }
+                            // }
+                        }
                     }
+
+                    
                 }
 
                 button{
@@ -180,6 +197,10 @@ const Nav = ({color}) => {
     const { setBackgroundBlur } = useNavContext();
     const {ttlItems} = useCartContext();
 
+    const {user} = useUser();
+    const route = useRouter();
+
+
     useEffect(()=>{
         setBackgroundBlur(isOpen);
     },[isOpen])
@@ -242,9 +263,44 @@ const Nav = ({color}) => {
                                     )
                                 })
                             }
+
+                           { user && 
+                                    (<motion.li 
+                                        className="link-wrapper profile"
+                                        variants={variants}
+                                        whileTap={{ scale: 0.8 }}
+                                        style={{pointerEvents: !isOpen && 'none'}}
+                                    >
+                                        <Link className="nav-link" href={`/profile`}>
+                                            <div>
+                                                Profile
+                                                <Icon.ChevronRight/>
+                                            </div>
+                                        </Link>
+                                                    
+                                    </motion.li>) 
+                            }
+
+
+                            <motion.li 
+                                className="link-wrapper btn"
+                                variants={variants}
+                                whileTap={{ scale: 0.8 }}
+                                style={{pointerEvents: !isOpen && 'none'}}
+                            >
+                                {/* <Link className="nav-link" href={`${user ? '' : '/profile'}`}> */}
+                                    <button
+                                        onClick={() => user ? route.push('/api/auth/logout') : route.push('/api/auth/login')}
+                                    >
+                                        {user ? 'Logout' : 'Sign In'}
+                                    </button>
+                                {/* </Link> */}
+                                                    
+                            </motion.li>
                         </ul>
                         
                         <NavMenuToggle 
+                            className="nav-toggle"
                             toggle={() => {
                                 toggleOpen();
                             }} 
@@ -262,15 +318,13 @@ const Nav = ({color}) => {
                 </div>
 
                 <div className="shopping-information">
-
+                    <UserProfile/>
                     <Link className="cart" href='/cart'>
                         <div>
                             <div className="shopping-icon">
                                 <Icon.Bag className='action-icon' style={{fill: color && color}}/>
                                 <p className="cart-total">{ttlItems}</p>
                             </div>
-                            
-                            <div className="icon-text">Cart</div>
                         </div>
                     </Link>
                     
