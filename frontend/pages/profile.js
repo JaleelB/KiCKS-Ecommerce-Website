@@ -3,6 +3,7 @@ const stripe = require('stripe')(`${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`)
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 import styled from 'styled-components';
 import { Layout } from "../layout";
+import formatMoney from '../lib/formatMoney';
 
 export const getServerSideProps = withPageAuthRequired({
     async getServerSideProps(ctx){
@@ -47,7 +48,7 @@ export default function Profile({user, orders}){
                                                 <div className="square"></div>
                                                 <div className='order-details'>
                                                     <p>Order Number: {order.id}</p>
-                                                    <p>Order Amount: ${order.amount}</p>
+                                                    <p>Order Amount: {formatMoney(order.amount)}</p>
                                                     <p>Receipt Email: {user.email}</p>
                                                 </div>
                                             </div>

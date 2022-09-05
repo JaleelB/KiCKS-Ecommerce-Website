@@ -87,7 +87,7 @@ const Cart = () => {
     const feesTitles = ['Subtotal', 'Estimated Shipping & Handling', 'Estimated Tax', 'Discount', 'Total'];
 
     //cart details
-    const { cart, ttlCost } = useCartContext();
+    const { cart, ttlCost, emptyCart } = useCartContext();
 
     //stripe payment
     const handleCheckout = async() => {
@@ -176,7 +176,16 @@ const Cart = () => {
 
 
                                 <div className="billing-cta-wrapper">
-                                    <button className="cta-btn checkout" onClick={handleCheckout}>Checkout</button>
+                                    <button 
+                                        className="cta-btn checkout" 
+                                        // onClick={() => {
+                                        //     handleCheckout();
+                                        //     // emptyCart();
+                                        // }}
+                                        onClick={handleCheckout}
+                                    >
+                                        Checkout
+                                    </button>
                                     <button className="cta-btn paypal" disabled>Paypal</button>
                                     <button className="cta-btn apple-pay" disabled>Apple Pay</button>
                                 </div>

@@ -25,14 +25,19 @@ export function CartContextProvider({ children }) {
         setTtlItems(ttlCount);
     }
 
-    const getTotalCost = (()=>{
+    const emptyCart = () => {
+        state.cart.length = 0;
+        sessionStorage.setItem(PREFIX + "cart", JSON.stringify(state.cart))
+    }
+
+    const getTotalCost = ()=>{
         let ttlCost = 0;
         for(let i =0; i<state.cart.length; i++){
             ttlCost += (state.cart[i].quantity * state.cart[i].price);  
         }
 
         setTtlCost(ttlCost);
-    })
+    }
 
     useEffect(()=>{
         getTtlItemsInCart();
@@ -43,7 +48,7 @@ export function CartContextProvider({ children }) {
     return (
         <CartContext.Provider value={{
             // addToCart, cart, removeFromCart
-            cart: state.cart, dispatch, ttlItems, ttlCost
+            cart: state.cart, dispatch, ttlItems, ttlCost, emptyCart
         }}>
         {children}
         </CartContext.Provider>
