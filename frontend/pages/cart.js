@@ -87,7 +87,7 @@ const Cart = () => {
     const feesTitles = ['Subtotal', 'Estimated Shipping & Handling', 'Estimated Tax', 'Discount', 'Total'];
 
     //cart details
-    const { cart, ttlCost, emptyCart } = useCartContext();
+    const { cart, ttlCost } = useCartContext();
 
     //stripe payment
     const handleCheckout = async() => {
@@ -180,7 +180,7 @@ const Cart = () => {
                                         className="cta-btn checkout" 
                                         // onClick={() => {
                                         //     handleCheckout();
-                                        //     // emptyCart();
+                                        //     emptyCart();
                                         // }}
                                         onClick={handleCheckout}
                                     >

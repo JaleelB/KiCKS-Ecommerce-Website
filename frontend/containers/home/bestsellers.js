@@ -13,14 +13,22 @@ const StyledBestSellers = styled.section`
 
         .best-sellers-carousel{
 
-            display: flex;  gap: 8px;
-            overflow-x: auto; overflow-y: hidden;
+            display: flex;  
+            /* overflow-x: auto; overflow-y: hidden;
             /* grid-auto-flow: column;  */
             //grid-auto-columns: 25%;
 
             /* @media (max-width: 1024px){
                 grid-auto-columns: 46%;
-            } */
+            } */ 
+
+            flex-wrap: wrap;
+
+            a{
+                @media(max-width: 839px){--products-in-view: 2;}
+                @media(min-width: 840px ){--products-in-view: 3;}
+                @media(min-width: 1600px) {--products-in-view: 4;}
+            }
 
         }
     }

@@ -2,7 +2,8 @@ const ACTIONS = {
     ADD_TO_CART: 'add-item-to-cart',
     REMOVE_FROM_CART: 'remove-from-cart',
     INCREASE_CART_ITEM: 'increase-cart-item',
-    DECREASE_CART_ITEM: 'decrease-cart-item'
+    DECREASE_CART_ITEM: 'decrease-cart-item',
+    EMPTY_CART: 'empty-cart'
 };
 
 export const CartReducer = (state, action) => {
@@ -68,7 +69,12 @@ export const CartReducer = (state, action) => {
                 ...state,
                 cart: cartAfterDecrease
             }
-            
+
+        case ACTIONS.EMPTY_CART:
+            return{
+                ...state,
+                cart: action.payload
+            };     
       
         default: 
             return state;

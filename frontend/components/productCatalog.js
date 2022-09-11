@@ -15,7 +15,8 @@ const StyledProductCatalog = styled.div`
 
 const ProductCatalog = ({products, filter, sortBy}) => {
 
-    console.log(products);
+
+    //FILTERES PRODCUTS BVASED ONCERTSAIN FILTER APSSEWDF DOEWN
     const filteredProductsArray = products.filter((product)=> product.attributes.Gender === filter);
     console.log(filteredProductsArray);
 

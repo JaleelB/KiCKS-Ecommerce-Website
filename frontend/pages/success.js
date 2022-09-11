@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import {useRouter} from 'next/router';
 import { Layout } from '../layout';
+import formatMoney from '../lib/formatMoney';
+import { useCartContext } from "../context/CartContext";
 
 
 const StyledSuccessPage = styled.section`
@@ -95,6 +97,10 @@ export async function getServerSideProps(params){
 const Success = ({order}) => {
 
     const route = useRouter();
+    const { setCheckoutSuccess } = useCartContext();
+    useEffect(()=>{
+        setCheckoutSuccess(true);
+    })
 
     return (
         <Layout color="black">
@@ -133,7 +139,7 @@ const Success = ({order}) => {
                                                 <div key={product.id}>
                                                     <p>Product: {product.description}</p>
                                                     <p>Quantity: {product.quantity}</p>
-                                                    <p>Price: {product.price.unit_amount}</p>
+                                                    <p>Price: {formatMoney(product.price.unit_amount)}</p>
                                                 </div>
                                             )
                                         })

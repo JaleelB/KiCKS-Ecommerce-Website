@@ -6,6 +6,8 @@ import { GET_PRODUCT_QUERY } from "../../lib/query";
 import { useState } from "react";
 import { useCartContext } from "../../context/CartContext";
 import { v4 as uuidv4 } from 'uuid';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const StyledProductDetails = styled.section`
     padding: 0;
@@ -113,6 +115,14 @@ const StyledProductDetails = styled.section`
                     @media(max-width: 969px){ max-width: none; }
 
                  }
+
+                 .Toastify{
+                     .Toastify__toast-container{
+                        @media(max-width: 480px){ 
+                            top: 1rem; width: 95vw; margin-inline: .5rem; 
+                        }
+                     }
+                 }
             }
         }
     }
@@ -143,6 +153,8 @@ const ProductDetails = () => {
     if(error) return <p>{error.message}</p>
 
     const { Color, Description, Gender, Image, Price, Title, Slug}  = data.products.data[0].attributes;
+
+    const addToCartNotification = () => toast('Item added to cart')
 
     return (
         <Layout color={'black'}>
@@ -208,7 +220,7 @@ const ProductDetails = () => {
                         <div className="cta-wrapper">
                             <button 
                                 className="cta-btn"
-                                onClick={()=>
+                                onClick={()=>{
                                     dispatch( {
                                         type: 'add-item-to-cart', payload: {
                                             size: selectedSize,
@@ -222,10 +234,12 @@ const ProductDetails = () => {
                                             quantity: 1
                                         }
                                     })
-                                }
+                                    addToCartNotification();
+                                }}
                             >
                                 Add To Cart
                             </button>
+                            <ToastContainer />
                         </div>
                         
                     </div>

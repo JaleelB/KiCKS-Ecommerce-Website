@@ -1,7 +1,6 @@
  import { createContext, useContext, useReducer, useEffect, useState } from 'react';
 import {CartReducer} from '../reducer/CartReducer';
 
-
 const PREFIX = 'kicks-eccommerce-';
 
 const INITIAL_STATE = {
@@ -14,6 +13,7 @@ export function CartContextProvider({ children }) {
 
     const [ttlItems, setTtlItems] = useState(0);
     const [ttlCost, setTtlCost] = useState(0);
+    const [checkoutSuccess, setCheckoutSuccess] = useState(false);
     const [state, dispatch] = useReducer(CartReducer, INITIAL_STATE);
 
     const getTtlItemsInCart = () => {
@@ -26,8 +26,9 @@ export function CartContextProvider({ children }) {
     }
 
     const emptyCart = () => {
-        state.cart.length = 0;
-        sessionStorage.setItem(PREFIX + "cart", JSON.stringify(state.cart))
+        // state.cart.length = 0;
+        dispatch({type: 'empty-cart', payload: []})
+        sessionStorage.setItem(PREFIX + "cart", JSON.stringify([]))
     }
 
     const getTotalCost = ()=>{
@@ -45,10 +46,15 @@ export function CartContextProvider({ children }) {
         sessionStorage.setItem(PREFIX + "cart", JSON.stringify(state.cart))
     },[state.cart])
 
+    useEffect(() => {
+        if(checkoutSuccess)emptyCart();
+    }, [checkoutSuccess])
+
+
     return (
         <CartContext.Provider value={{
-            // addToCart, cart, removeFromCart
-            cart: state.cart, dispatch, ttlItems, ttlCost, emptyCart
+            cart: state.cart, dispatch, ttlItems, 
+            ttlCost, emptyCart, setCheckoutSuccess
         }}>
         {children}
         </CartContext.Provider>
